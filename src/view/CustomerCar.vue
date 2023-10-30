@@ -1,7 +1,7 @@
 <template>
     <div v-if="store.isChatVisible" @click="toggleSelect" class="message-icon right-box ">
         <div class="messsage-btn-img">
-            <img src="../../src/assets/img/customerImg/imgpsh_fullsize_anim .png" alt="" />
+            <img src="../../src/assets/img/customerImg/custtomer.png" alt="" />
         </div>
     </div>
     <div class="overlay" v-else>
