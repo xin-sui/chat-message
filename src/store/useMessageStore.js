@@ -1,8 +1,8 @@
 import { ref, watch } from 'vue'
 import { defineStore } from 'pinia'
 import img1 from '../assets/img/customerImg/customer-img.png'
-import img2 from '../assets/img/customerImg/customer-img.png'
-import img3 from '../assets/img/customerImg/customer-img.png'
+import img2 from '../assets/img/customerImg/customer-img2.png'
+import img3 from '../assets/img/customerImg/customer-img3.png'
 import { socket } from '../socket'
 export const useMessageStore = defineStore('message', () => {
   const toCustomer = ref(true)
