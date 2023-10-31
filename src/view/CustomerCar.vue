@@ -1,6 +1,6 @@
 <template>
   <div v-if="store.isChatVisible" @click="toggleSelect" class="message-icon right-box"
-    :style="{ 'max-height': props.custTop + 'px', 'right': props.custRight + 'px' }">
+    :style="{ 'bottom': props.custDown, 'right': props.custRight }">
     <div class="messsage-btn-img">
 
       <img v-if="props.custIcon" :src="props.custIcon" alt="" />
@@ -22,8 +22,9 @@ import Message from '../components/customer/CustMessage.vue'
 import { nextTick } from 'vue'
 import { useMessageStore } from '../store/useMessageStore'
 import { gsap } from 'gsap'
-const props = defineProps(['custIcon', 'custTop', 'custRight'])
+const props = defineProps(['custIcon', 'custDown', 'custRight', 'setUrl'])
 const store = useMessageStore()
+store.setSocketUrl = props.setUrl
 nextTick(() => {
   gsap.from('.right-box', { duration: 1, x: 200 })
 })
@@ -45,18 +46,14 @@ const toggleSelect = () => {
 <style scoped>
 .right-box {
   position: fixed;
-  height: 100%;
-  right: 0px;
-  bottom: 24px;
-  max-width: 92px;
-  max-height: 495px;
+  right: 0%;
+  bottom: 50%;
   pointer-events: all;
   /* 让右侧的 right-box 元素接收点击事件 */
 }
 
 .messsage-btn-img {
-  width: 92px;
-  height: 142px;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,8 +61,8 @@ const toggleSelect = () => {
 }
 
 .messsage-btn-img img {
-  max-width: 100%;
-  max-height: 100%;
+  width: 92px;
+  height: 142px;
   object-fit: contain;
 }
 

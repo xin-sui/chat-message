@@ -62,7 +62,7 @@ const toClose = () => {
         onComplete: () => {
             // 在动画完成后执行关闭窗口的逻辑
             store.isChatVisible = !store.isChatVisible;
-            store.isEmailBox = !store.isEmailBox
+            store.isEmailBox = false
             nextTick(() => {
                 // 执行另一个动画，例如放大动画
                 gsap.from('.right-box', {

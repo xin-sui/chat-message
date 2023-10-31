@@ -49,13 +49,16 @@
 import { ref, nextTick } from "vue";
 import CustomerLayout from "./CustomerLayout.vue";
 import { useMessageStore } from "@/store/useMessageStore";
-import socket from "@/socket";
+import { socket, setSocketUrl } from "@/socket";
 const store = useMessageStore();
 import { gsap } from "gsap";
 const maxrecoon = ref(0);
-
 const animate = gsap.timeline();
 const isButtonDisabled = ref(false);
+
+if (store.setSocketUrl) {
+  setSocketUrl(store.setSocketUrl)
+}
 const toCustomer = async () => {
   const userID = localStorage.getItem("userID");
   console.log(userID);

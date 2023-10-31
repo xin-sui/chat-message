@@ -61,7 +61,7 @@
 import CustomerLayout from './CustomerLayout.vue';
 import { onMounted, ref, nextTick } from 'vue';
 import { useMessageStore } from '@/store/useMessageStore';
-import socket from '@/socket'
+import { socket } from '@/socket'
 import { gsap } from "gsap";
 import data from "emoji-mart-vue-fast/data/all.json";
 // Import default CSS
