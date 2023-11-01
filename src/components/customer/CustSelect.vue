@@ -126,12 +126,12 @@ nextTick(() => {
   gsap.fromTo(
     ".content-title",
     { opacity: 0, x: -10 },
-    { duration: 1, opacity: 0.5, x: 0 }
+    { duration: 0.5, opacity: 1, x: 0 }
   );
   gsap.fromTo(
     ".select-customer-img",
     { opacity: 0, x: 50 },
-    { duration: 1, opacity: 0.5, x: 0 }
+    { duration: 0.5, opacity: 1, x: 0 }
   );
 });
 </script>
