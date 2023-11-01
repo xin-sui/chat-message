@@ -142,8 +142,19 @@ const toClose = () => {
 }
 
 .header-title p {
+    color: #474747;
     font-size: 15px;
     font-weight: 700;
+}
+
+.header-close {
+    display: flex;
+    align-items: center;
+}
+
+.header-close img {
+    width: 20px;
+    height: 20px;
 }
 
 .email-box {

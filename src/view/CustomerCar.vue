@@ -1,11 +1,11 @@
 <template>
-  <div v-if="store.isChatVisible" @click="toggleSelect" class="message-icon right-box"
-    :style="{ 'bottom': props.custDown, 'right': props.custRight }">
+  <div v-if="store.isChatVisible" @click="toggleSelect" class="message-icon right-box">
+    <!-- <slot name="cust-icon"></slot>
     <div class="messsage-btn-img">
 
       <img v-if="props.custIcon" :src="props.custIcon" alt="" />
       <img v-else src="../../src/assets/img/customerImg/custtomer.png" alt="" />
-    </div>
+    </div> -->
   </div>
   <div class="overlay" v-else>
     <transition name="select-message-fade" mode="out-in">
@@ -44,12 +44,11 @@ const toggleSelect = () => {
 </script>
 
 <style scoped>
-.right-box {
+/*.right-box {
   position: fixed;
   right: 0%;
   bottom: 50%;
   pointer-events: all;
-  /* 让右侧的 right-box 元素接收点击事件 */
 }
 
 .messsage-btn-img {
@@ -64,7 +63,7 @@ const toggleSelect = () => {
   width: 92px;
   height: 142px;
   object-fit: contain;
-}
+}*/
 
 .overlay {
   position: fixed;

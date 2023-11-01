@@ -31,14 +31,6 @@ export const useMessageStore = defineStore('message', () => {
     }
   })
 
-  socket.on('private message', (msg) => {
-    userMessage.value.push({
-      id: userMessage.value.length + 1,
-      content: msg,
-      receiver: true
-    })
-  })
-
   return {
     toCustomer,
     isChatVisible,

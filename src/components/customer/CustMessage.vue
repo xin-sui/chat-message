@@ -141,7 +141,15 @@ onMounted(() => {
     // 页面加载完成后滚动到底部
     scrollToBottom();
 });
-
+socket.on('private message', (msg) => {
+    console.log(msg)
+    store.userMessage.push({
+        id: store.userMessage.length + 1,
+        content: msg,
+        receiver: true
+    })
+    scrollToBottom();
+})
 
 </script>
 
