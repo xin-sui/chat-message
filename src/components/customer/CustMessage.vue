@@ -194,7 +194,6 @@ socket.on('private message', (msg) => {
 
 .message {
     display: flex;
-    align-items: center;
     margin: 10px;
 }
 
