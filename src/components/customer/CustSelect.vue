@@ -6,32 +6,35 @@
       </div>
     </template>
     <template #content>
-      <div class="content-title">
-        <div class="title-img">
-          <img src="../../assets/img/customerImg/content.png" alt="" srcset="" />
-        </div>
-        <div class="title-text">
-          <p><img src="../../assets/img//customerImg/title-text-img.png" alt="" srcset=""></p>
-
-          <p><img src="../../assets/img//customerImg/title-text-img2.png" alt="" srcset=""></p>
-        </div>
-      </div>
-      <div class="select-box">
-        <div class="consultation-top">
-          <img class="consultation-text-svg" src="../../assets/img/customerImg/message2.png" alt="" srcset="" />
-          <p>online consultation</p>
-        </div>
-      </div>
-      <div class="consultation-box " @click="toCustomer">
-        <div class="consultation">
-          <div class="consultation-left">
-            <img src="../../assets/img/customerImg/start.png" alt="">
-            <img src="../../assets/img/customerImg/consultation.png" alt="">
+      <div class="content-box">
+        <div class="content-title">
+          <div class="title-img">
+            <img class="" src="../../assets/img/customerImg/content.png" alt="" srcset="" />
           </div>
-          <img class="consultation-right" src="../../assets/img/customerImg/fly.png" alt="">
-        </div>
+          <div class="title-text">
+            <img src="../../assets/img//customerImg/title-text-img.png" alt="" srcset="">
 
+            <img src="../../assets/img//customerImg/title-text-img2.png" alt="" srcset="">
+          </div>
+        </div>
+        <div class="select-box">
+          <div class="consultation-top">
+            <img class="consultation-text-svg" src="../../assets/img/customerImg/message2.png" alt="" srcset="" />
+            <p>online consultation</p>
+          </div>
+        </div>
+        <div class="consultation-box " @click="toCustomer">
+          <div class="consultation">
+            <div class="consultation-left">
+              <img src="../../assets/img/customerImg/start.png" alt="">
+              <img src="../../assets/img/customerImg/consultation.png" alt="">
+            </div>
+            <img class="consultation-right" src="../../assets/img/customerImg/fly.png" alt="">
+          </div>
+
+        </div>
       </div>
+
     </template>
     <template #bottom>
       <div class="bottom-info">
@@ -122,13 +125,13 @@ nextTick(() => {
   // 使用GSAP添加进入动画到content-title和select-box元素
   gsap.fromTo(
     ".content-title",
-    { opacity: 0, x: -50 },
-    { duration: 1, opacity: 1, x: 0 }
+    { opacity: 0, x: -10 },
+    { duration: 1, opacity: 0.5, x: 0 }
   );
   gsap.fromTo(
     ".select-customer-img",
     { opacity: 0, x: 50 },
-    { duration: 1, opacity: 1, x: 0 }
+    { duration: 1, opacity: 0.5, x: 0 }
   );
 });
 </script>
@@ -138,53 +141,75 @@ nextTick(() => {
   width: 20px;
 }
 
+.content-box {
+  padding: 0 35px;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .content-title {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  padding: 150px 60px
+  width: 370px;
+  padding: 0 20px;
+  flex: 5;
+}
+
+.title-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 2;
 }
 
 .title-img img {
-  width: 88px;
-  height: 73px;
+  width: 66px;
+  height: 55px;
 }
 
 .title-text {
-  margin-left: 20px;
-  color: #33bcea;
+  margin-left: 10px;
   width: 100%;
-
+  display: flex;
+  flex-direction: column;
 }
 
-.title-text p img {
+.title-text img {
   height: 36px;
 }
 
-.title-text p:nth-child(2) {
+.title-text img:nth-child(2) {
   margin-top: 2%;
+  width: 254px;
+}
+
+.title-text img:nth-child(1) {
+  width: 85px;
 }
 
 .select-box {
   width: 100%;
   /* background-color: blue; */
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: end;
   align-items: center;
-  height: 60%;
 }
 
 
 .consultation-box {
   display: flex;
+  flex: 1;
   justify-content: center;
   /* 水平居中 */
   align-items: center;
   width: 100%;
   border-radius: 10px;
-  padding: 0 30px;
 }
 
 .consultation {
@@ -264,9 +289,6 @@ nextTick(() => {
 }
 
 
-.title-text-call {
-  display: none;
-}
 
 /* 或者使用媒体查询来根据屏幕宽度调整字体大小 */
 @media (max-width: 768px) {

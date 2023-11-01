@@ -104,7 +104,7 @@ const animate = gsap.timeline()
 nextTick(() => {
     animate.fromTo(
         '.message-container',
-        { opacity: 0, y: -20 },
+        { opacity: 0, y: -10 },
         {
             duration: 0.5, opacity: 1, y: 0, onComplete: () => {
                 // 在动画完成后，可以添加其他逻辑

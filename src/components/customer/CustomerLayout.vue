@@ -84,8 +84,8 @@ const toClose = () => {
     height: 90%;
     right: 1%;
     bottom: 2%;
-    max-width: 502px;
-    max-height: 728px;
+    max-width: 440px;
+    max-height: 616px;
     width: 100%;
     pointer-events: auto;
     border-radius: 3%;
