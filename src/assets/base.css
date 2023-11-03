@@ -34,6 +34,9 @@
   --color-text: var(--vt-c-text-light-1);
 
   --section-gap: 160px;
+
+  --svg-fill-color: #33baea
+    /* 声明 --svg-fill-color 并将它初始化为 --app-color-button-icon-1 的值 */;
 }
 
 @media (prefers-color-scheme: dark) {
