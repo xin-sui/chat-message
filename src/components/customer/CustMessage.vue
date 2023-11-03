@@ -150,6 +150,17 @@ socket.on('private message', (msg) => {
     })
     scrollToBottom();
 })
+socket.on('gpt message', async stream => {
+
+    // 如果遇到换行符，将接收消息添加到消息数组中
+    store.userMessage.push({
+        id: store.userMessage.length + 1,
+        content: stream,
+        receiver: true,
+    });
+    scrollToBottom();
+
+})
 
 </script>
 
