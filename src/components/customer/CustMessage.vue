@@ -297,7 +297,7 @@ socket.on('gpt message', async stream => {
     transform: translateY(-50%);
     border-radius: 50px;
     /* 圆角 */
-    background-color: #33BCEA;
+    background-color: var(--svg-fill-color);
     /* 背景颜色 */
     width: 88px;
     height: 40px;
