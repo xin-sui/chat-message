@@ -165,7 +165,7 @@ nextTick(() => {
 
 <style scoped>
 svg path {
-  fill: var(--svg-fill-color);
+  fill: var(--app-color-top-bar-bg2);
   /* 使用 --svg-fill-color 变量来设置 SVG 的填充颜色 */
 }
 
@@ -247,7 +247,7 @@ svg path {
 .consultation {
   height: 100px;
   width: 100%;
-  background-color: var(--svg-fill-color);
+  background-color: var(--app-color-top-bar-bg2);
   margin: 10px 0;
   border-radius: 50px;
   display: flex;

@@ -2,7 +2,7 @@
 
 /* semantic color variables for this project */
 :root {
-  --svg-fill-color: #33baea
+  --app-color-top-bar-bg2: #33baea
     /* 声明 --svg-fill-color 并将它初始化为 --app-color-button-icon-1 的值 */;
 }
 
