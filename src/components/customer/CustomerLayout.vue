@@ -50,7 +50,7 @@
 <script setup>
 import { useMessageStore } from '@/store/useMessageStore';
 import { gsap } from 'gsap';
-import { nextTick } from 'vue';
+// import { nextTick } from 'vue';
 
 const store = useMessageStore();
 
@@ -58,18 +58,18 @@ const toClose = () => {
     // 创建一个缩小动画，将消息容器从当前大小缩小为0，持续时间为1秒
     gsap.to('.message-container', {
         duration: 1,
-        x: 600,
+        y: -10,
         onComplete: () => {
             // 在动画完成后执行关闭窗口的逻辑
             store.isChatVisible = !store.isChatVisible;
             store.isEmailBox = false
-            nextTick(() => {
-                // 执行另一个动画，例如放大动画
-                gsap.from('.right-box', {
-                    duration: 1,
-                    x: 200,
-                });
-            })
+            // nextTick(() => {
+            //     // 执行另一个动画，例如放大动画
+            //     gsap.from('.right-box', {
+            //         duration: 1,
+            //         y: 10,
+            //     });
+            // })
 
         },
     });
