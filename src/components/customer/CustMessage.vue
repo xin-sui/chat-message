@@ -104,7 +104,7 @@ const animate = gsap.timeline()
 nextTick(() => {
     animate.fromTo(
         '.message-container',
-        { opacity: 0, y: -10 },
+        { opacity: 0, y: 0 },
         {
             duration: 0.5, opacity: 1, y: 0, onComplete: () => {
                 // 在动画完成后，可以添加其他逻辑
@@ -297,7 +297,7 @@ socket.on('gpt message', async stream => {
     transform: translateY(-50%);
     border-radius: 50px;
     /* 圆角 */
-    background-color: var(--app-color-top-bar-bg2);
+    background-color: var(--app-color-button-bg);
     /* 背景颜色 */
     width: 88px;
     height: 40px;

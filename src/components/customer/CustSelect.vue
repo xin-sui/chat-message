@@ -106,9 +106,9 @@ const toCustomer = async () => {
   // nextTick(() => {
   if (store.serverCode.code == 1) {
     animate.to(".message-container", {
-      duration: 1,
+      duration: 0.5,
       opacity: 0,
-      y: -20,
+      y: -5,
       onComplete: () => {
         // 在动画完成后执行关闭窗口的逻辑
         store.toCustomer = false;
@@ -165,7 +165,7 @@ nextTick(() => {
 
 <style scoped>
 svg path {
-  fill: var(--app-color-top-bar-bg2);
+  fill: var(--app-color-button-bg);
   /* 使用 --svg-fill-color 变量来设置 SVG 的填充颜色 */
 }
 
@@ -247,7 +247,7 @@ svg path {
 .consultation {
   height: 100px;
   width: 100%;
-  background-color: var(--app-color-top-bar-bg2);
+  background-color: var(--app-color-button-bg);
   margin: 10px 0;
   border-radius: 50px;
   display: flex;
