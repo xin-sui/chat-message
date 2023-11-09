@@ -25,11 +25,13 @@
             <div class="email-box-inp">
                 <div class="inp-top">
                     <span>电话</span>
-                    <input type="text">
+                    <input v-model="phoneNumber" type="text" @input="validatePhoneNumber">
+                    <div v-if="phoneNumberError" :style="{ color: 'red' }" class="error">{{ phoneNumberError }}</div>
                 </div>
                 <div class="inp-bot">
                     <span>邮箱</span>
-                    <input type="text">
+                    <input v-model="email" type="text" @input="validateEmail">
+                    <div v-if="emailError" :style="{ color: 'red' }" class="error">{{ emailError }}</div>
                 </div>
             </div>
             <p class="email-text">
@@ -39,7 +41,7 @@
                 <p class="box-btn-left" @click="store.toggleEmail">
                     Cancel
                 </p>
-                <p class="box-btn-right">
+                <p class="box-btn-right" @click="contactEmali">
                     Contact Me
                 </p>
             </div>
@@ -50,15 +52,20 @@
 <script setup>
 import { useMessageStore } from '@/store/useMessageStore';
 import { gsap } from 'gsap';
+import { ref } from 'vue';
+import { sendEmail } from '../../axios/axios'
 // import { nextTick } from 'vue';
-
+const phoneNumber = ref('')
+const email = ref('')
+const phoneNumberError = ref('');
+const emailError = ref('');
 const store = useMessageStore();
 
 const toClose = () => {
     // 创建一个缩小动画，将消息容器从当前大小缩小为0，持续时间为1秒
     gsap.to('.message-container', {
-        duration: 1,
-        y: -10,
+        duration: 0.3,
+        y: -5,
         onComplete: () => {
             // 在动画完成后执行关闭窗口的逻辑
             store.isChatVisible = !store.isChatVisible;
@@ -73,6 +80,44 @@ const toClose = () => {
 
         },
     });
+};
+//发送邮箱手机
+const contactEmali = async () => {
+    const data = {
+        phone: phoneNumber.value,
+        email: email.value,
+        subject: '咨询',
+
+    }
+    try {
+        const res = await sendEmail(data)
+        if (res.data.code == 1) {
+            email.value = ""
+            email.value = ""
+            console.log('发送成功');
+        }
+    } catch (error) {
+        console.log(error);
+    }
+
+}
+//验证
+const validatePhoneNumber = () => {
+    // Add your phone number validation logic here
+    if (!/^\d{11}$/.test(phoneNumber.value)) {
+        phoneNumberError.value = 'Invalid phone number';
+    } else {
+        phoneNumberError.value = '';
+    }
+};
+
+const validateEmail = () => {
+    // Add your email validation logic here
+    if (!/^\S+@\S+\.\S+$/.test(email.value)) {
+        emailError.value = 'Invalid email address';
+    } else {
+        emailError.value = '';
+    }
 };
 </script>
 

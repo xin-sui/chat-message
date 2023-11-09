@@ -24,6 +24,7 @@ export const useMessageStore = defineStore('message', () => {
   watch(serverCode.value, (newQuestion) => {
     if (newQuestion.code == 0) {
       toCustomer.value = true
+      isEmailBox.value = false
       socket.disconnect()
     } else {
       toCustomer.value = false

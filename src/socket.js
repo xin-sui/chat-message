@@ -1,6 +1,6 @@
 import { io } from 'socket.io-client'
 
-// const URL = "https://fb.webguru188.xyz";
+// let sokcetUrl = 'https://fb.webguru188.xyz'
 let sokcetUrl = 'http://localhost:1337'
 let socket = io(sokcetUrl, { autoConnect: false })
 
