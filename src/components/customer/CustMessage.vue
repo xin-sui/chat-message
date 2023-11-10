@@ -260,7 +260,6 @@ socket.on('gpt message', async (stream) => {
   background-color: #e1e1e1;
   font-size: 15px;
   white-space: pre-wrap;
-  width: 70%;
 }
 
 .message-text-right {
