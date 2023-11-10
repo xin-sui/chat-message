@@ -30,17 +30,26 @@ nextTick(() => {
 })
 const toggleSelect = () => {
   store.isChatVisible = !store.isChatVisible
+  // nextTick(() => {
+  //   gsap.to('.message-container', {
+  //     duration: 1,
+  //     x: -200,
+  //   });
+  // })
+  const animate = gsap.timeline()
   nextTick(() => {
-    gsap.fromTo(
+    animate.fromTo(
       '.message-container',
-      { scale: 1.5 },
+      { opacity: 0, x: 200 },
       {
-        duration: 1,
-        scale: 1
-      }
-    )
-  })
+        duration: 0.5, opacity: 1, x: 0, onComplete: () => {
+          // 在动画完成后，可以添加其他逻辑
+
+        }
+      });
+  });
 }
+
 </script>
 
 <style scoped>

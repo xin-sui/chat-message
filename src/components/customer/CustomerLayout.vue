@@ -1,365 +1,415 @@
 <template>
-    <div class="message-container">
-        <div class="message-header">
-            <slot name="headerLeft"></slot>
-            <div class="header-img">
-                <img src="../../assets/img/customerImg/msg-icon.png" alt="" srcset="" />
-            </div>
-            <div class="header-title">
-                <p>客服</p>
-            </div>
-            <div class="header-close">
-                <img class="close-svg" width="18" height="18" src="../../assets/img/customerImg/close.png" @click="toClose"
-                    alt="" srcset="">
-
-            </div>
-
-        </div>
-        <div class="message-content">
-            <slot name="content"></slot>
-        </div>
-        <div class="message-bottom">
-            <slot name="bottom"></slot>
-        </div>
-        <div v-if="store.isEmailBox" class="email-box">
-            <div class="email-box-inp">
-                <div class="inp-top">
-                    <span>电话</span>
-                    <input v-model="phoneNumber" type="text" @input="validatePhoneNumber">
-                    <div v-if="phoneNumberError" :style="{ color: 'red' }" class="error">{{ phoneNumberError }}</div>
-                </div>
-                <div class="inp-bot">
-                    <span>邮箱</span>
-                    <input v-model="email" type="text" @input="validateEmail">
-                    <div v-if="emailError" :style="{ color: 'red' }" class="error">{{ emailError }}</div>
-                </div>
-            </div>
-            <p class="email-text">
-                (choose one to fill in)
-            </p>
-            <div class="email-box-btn">
-                <p class="box-btn-left" @click="store.toggleEmail">
-                    Cancel
-                </p>
-                <p class="box-btn-right" @click="contactEmali">
-                    Contact Me
-                </p>
-            </div>
-        </div>
+  <div class="message-container">
+    <div class="message-header">
+      <slot name="headerLeft"></slot>
+      <div class="header-img">
+        <svg
+          width="150"
+          height="32"
+          viewBox="0 0 150 32"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M38.3203 0.129609H40.5809V12.4717H38.3203V0.129609ZM39.3558 5.44804H43.1843C43.4402 5.45397 43.6927 5.38633 43.9135 5.25272C44.12 5.1225 44.2868 4.93508 44.3948 4.71186C44.5157 4.46526 44.5758 4.1918 44.5698 3.9156C44.5741 3.63476 44.5142 3.35683 44.3948 3.10432C44.2918 2.87995 44.1269 2.69182 43.9208 2.56346C43.6996 2.43173 43.4469 2.36665 43.1915 2.37566H39.3631V0.122089H43.1332C43.82 0.106722 44.4996 0.269462 45.1094 0.595344C45.6562 0.8945 46.1089 1.34787 46.4147 1.90241C46.7358 2.51009 46.8968 3.19386 46.8814 3.88557C46.8968 4.57727 46.7358 5.26102 46.4147 5.8687C46.1079 6.43142 45.6495 6.89061 45.0948 7.19081C44.4832 7.51081 43.8045 7.67076 43.1186 7.65654H39.3485L39.3558 5.44804Z"
+            fill="#474747"
+          />
+          <path
+            d="M51.7031 0.123047H53.9564V12.4726H51.7031V0.123047ZM52.6001 5.26871H56.7712C56.986 5.27243 57.1968 5.20961 57.3765 5.08841C57.5586 4.9634 57.7007 4.78567 57.7849 4.57761C57.8831 4.33993 57.9351 4.08472 57.938 3.82642C57.9441 3.56798 57.8943 3.31138 57.7922 3.07522C57.7083 2.86693 57.5662 2.68909 57.3838 2.56442C57.2012 2.44441 56.9877 2.38417 56.7712 2.39164H52.6001V0.138062H56.9754C57.5833 0.128123 58.1827 0.286378 58.711 0.596301C59.2123 0.903685 59.6153 1.35541 59.8705 1.89585C60.1579 2.49818 60.3004 3.16292 60.2861 3.83394C60.3004 4.50495 60.1579 5.16967 59.8705 5.772C59.6158 6.31327 59.2094 6.76337 58.7037 7.06405C58.179 7.37651 57.5813 7.535 56.9754 7.52229H52.6001V5.26871ZM55.1232 7.12416L57.5369 6.73352L60.7674 12.4726H58.0328L55.1232 7.12416Z"
+            fill="#474747"
+          />
+          <path
+            d="M67.2438 12.0353C66.5918 11.6693 66.0573 11.116 65.7051 10.4427C65.3324 9.70615 65.1467 8.88437 65.1655 8.05394V4.55339C65.1458 3.72287 65.3315 2.90084 65.7051 2.16461C66.0552 1.48972 66.5903 0.935879 67.2438 0.572083C67.9484 0.1797 68.74 -0.0170558 69.5408 0.00116958C70.3393 -0.0171337 71.1286 0.179667 71.8306 0.572083C72.4841 0.935879 73.0192 1.48972 73.3693 2.16461C73.7451 2.90026 73.9333 3.72225 73.9162 4.55339V8.05394C73.9327 8.88501 73.7445 9.70684 73.3693 10.4427C73.0171 11.116 72.4825 11.6693 71.8306 12.0353C71.1266 12.4215 70.3383 12.6155 69.5408 12.5986C68.7411 12.6154 67.9504 12.4215 67.2438 12.0353ZM70.6055 10.007C70.9166 9.83816 71.1708 9.5763 71.3347 9.25586C71.5094 8.90255 71.597 8.51043 71.59 8.11403V4.5008C71.597 4.1068 71.5093 3.71714 71.3347 3.36652C71.1731 3.04434 70.9183 2.78185 70.6055 2.61532C70.2799 2.43032 69.9126 2.33703 69.5408 2.34488C69.1666 2.33606 68.7968 2.42937 68.4689 2.61532C68.1561 2.78185 67.9013 3.04434 67.7396 3.36652C67.5673 3.7177 67.4821 4.1074 67.4917 4.5008V8.11403C67.4821 8.50983 67.5673 8.90199 67.7396 9.25586C67.9036 9.5763 68.1578 9.83816 68.4689 10.007C68.7968 10.193 69.1666 10.2863 69.5408 10.2775C69.9126 10.2853 70.2799 10.1921 70.6055 10.007Z"
+            fill="#474747"
+          />
+          <path
+            d="M80.7525 12.0582C80.1173 11.7071 79.6067 11.1574 79.2941 10.4882C78.9335 9.71333 78.7585 8.86072 78.7836 8.0018V4.61392C78.7585 3.75258 78.9335 2.89754 79.2941 2.11998C79.6107 1.45375 80.1203 0.905191 80.7525 0.549991C81.4762 0.168909 82.2809 -0.0196134 83.0933 0.00161335C83.7969 -0.00756421 84.4915 0.165509 85.1133 0.504922C85.7132 0.853137 86.2156 1.35511 86.5717 1.96221C86.9866 2.66841 87.2616 3.45219 87.3812 4.26838H85.0622C84.9897 3.89739 84.8513 3.54341 84.6539 3.22423C84.4876 2.94941 84.2569 2.72208 83.983 2.56318C83.7173 2.40489 83.4148 2.32437 83.1079 2.33031C82.7311 2.31868 82.3582 2.4121 82.0287 2.60073C81.731 2.77068 81.4935 3.03376 81.3505 3.35192C81.183 3.73903 81.1032 4.16032 81.1171 4.58389V7.97175C81.104 8.39525 81.1837 8.81636 81.3505 9.20371C81.4963 9.51988 81.7331 9.78215 82.0287 9.9549C82.3582 10.1435 82.7311 10.237 83.1079 10.2253C83.4183 10.2301 83.7247 10.1525 83.9976 9.99997C84.2699 9.83881 84.5001 9.61196 84.6684 9.33892C84.8579 9.01451 84.9911 8.65866 85.0622 8.28726H87.403C87.2778 9.10306 87.0005 9.88619 86.5863 10.5934C86.23 11.1984 85.7275 11.6979 85.1279 12.0432C84.5103 12.387 83.817 12.5604 83.1152 12.5465C82.3004 12.5902 81.488 12.4223 80.7525 12.0582Z"
+            fill="#474747"
+          />
+          <path
+            d="M92.3516 0.130859H94.6122V12.4729H92.3516V0.130859ZM93.3943 5.23143H100.373V7.48501H93.3943V5.23143ZM98.9073 0.130859H101.168V12.4729H98.9073V0.130859Z"
+            fill="#474747"
+          />
+          <path
+            d="M108.642 12.0352C107.992 11.6689 107.46 11.1155 107.11 10.4427C106.735 9.70683 106.547 8.88501 106.564 8.05394V4.55338C106.546 3.72224 106.735 2.90025 107.11 2.1646C107.458 1.49024 107.991 0.936328 108.642 0.572073C109.346 0.179691 110.138 -0.0170651 110.939 0.0011603C111.74 -0.0170651 112.531 0.179691 113.236 0.572073C113.887 0.936328 114.42 1.49024 114.767 2.1646C115.143 2.90025 115.331 3.72224 115.314 4.55338V8.05394C115.331 8.88501 115.143 9.70683 114.767 10.4427C114.418 11.1155 113.886 11.6689 113.236 12.0352C112.529 12.4215 111.739 12.6154 110.939 12.5986C110.139 12.6154 109.348 12.4215 108.642 12.0352ZM112.011 10.007C112.32 9.83593 112.574 9.57464 112.74 9.25585C112.912 8.90198 112.998 8.50982 112.988 8.11402V4.50079C112.998 4.1074 112.912 3.7177 112.74 3.36651C112.576 3.04606 112.322 2.7842 112.011 2.61532C111.683 2.42936 111.313 2.33605 110.939 2.34487C110.565 2.33605 110.195 2.42936 109.867 2.61532C109.556 2.7842 109.302 3.04606 109.138 3.36651C108.965 3.7177 108.88 4.1074 108.89 4.50079V8.11402C108.88 8.50982 108.965 8.90198 109.138 9.25585C109.304 9.57464 109.557 9.83593 109.867 10.007C110.195 10.193 110.565 10.2863 110.939 10.2775C111.325 10.2931 111.709 10.1996 112.047 10.007H112.011Z"
+            fill="#474747"
+          />
+          <path d="M122.755 12.4729H120.414V0.130859H122.755V12.4729Z" fill="#474747" />
+          <path
+            d="M130.009 12.0582C129.374 11.7071 128.864 11.1574 128.551 10.4882C128.188 9.71397 128.01 8.86133 128.033 8.0018V4.61392C128.01 3.75197 128.188 2.8969 128.551 2.11998C128.868 1.45375 129.377 0.905191 130.009 0.549991C130.733 0.168909 131.538 -0.0196134 132.35 0.00161335C133.054 -0.00756421 133.748 0.165509 134.37 0.504922C134.97 0.853137 135.472 1.35511 135.829 1.96221C136.241 2.66898 136.513 3.45272 136.631 4.26838H134.297C134.225 3.89739 134.086 3.54341 133.889 3.22423C133.721 2.951 133.49 2.7241 133.218 2.56318C132.952 2.4056 132.65 2.32513 132.343 2.33031C131.966 2.31792 131.593 2.41139 131.264 2.60073C130.966 2.77068 130.728 3.03376 130.585 3.35192C130.416 3.73843 130.333 4.15974 130.345 4.58389V7.97175C130.334 8.39582 130.416 8.81696 130.585 9.20371C130.731 9.51988 130.968 9.78215 131.264 9.9549C131.593 10.1442 131.966 10.2377 132.343 10.2253C132.653 10.2301 132.96 10.1525 133.233 9.99997C133.505 9.86377 133.743 9.66298 133.925 9.41404C134.12 9.09166 134.256 8.73522 134.326 8.36238H136.66C136.537 9.17766 136.262 9.96076 135.851 10.6685C135.494 11.2735 134.992 11.773 134.392 12.1183C133.775 12.4621 133.081 12.6355 132.379 12.6216C131.556 12.6433 130.74 12.4494 130.009 12.0582Z"
+            fill="#474747"
+          />
+          <path
+            d="M141.57 0.130859H143.824V12.4729H141.57V0.130859ZM142.387 0.130859H149.592V2.38443H142.387V0.130859ZM142.387 5.22394H148.688V7.47751H142.387V5.22394ZM142.387 10.2344H149.592V12.4879H142.387V10.2344Z"
+            fill="#474747"
+          />
+          <path
+            d="M38.4922 19.5299H40.7528V31.872H38.4922V19.5299ZM39.5204 24.8483H43.3561C43.6121 24.8542 43.8646 24.7866 44.0854 24.653C44.2919 24.5228 44.4586 24.3354 44.5666 24.1121C44.6818 23.8637 44.7392 23.5911 44.7344 23.3159C44.741 23.0356 44.6835 22.7577 44.5666 22.5046C44.4637 22.2802 44.2988 22.0921 44.0927 21.9637C43.8707 21.8338 43.6186 21.7689 43.3634 21.7759H39.5277V19.5224H43.3051C43.9918 19.508 44.6711 19.6706 45.2813 19.9956C45.835 20.3006 46.2928 20.7618 46.6012 21.3252C46.9223 21.9329 47.0832 22.6167 47.0679 23.3084C47.0832 24.0001 46.9223 24.6838 46.6012 25.2915C46.2924 25.8527 45.8344 26.3113 45.2813 26.6136C44.6693 26.9327 43.9908 27.0926 43.3051 27.0794H39.5277L39.5204 24.8483Z"
+            fill="#474747"
+          />
+          <path
+            d="M54.7295 19.5312H56.188L60.7675 31.8733H58.3392L55.4733 23.445L52.6075 31.8733H50.1719L54.7295 19.5312ZM52.345 27.6591H58.6455V29.9127H52.345V27.6591Z"
+            fill="#474747"
+          />
+          <path
+            d="M66.3385 31.4586C65.7063 31.1034 65.1967 30.5549 64.88 29.8886C64.5195 29.1137 64.3445 28.2611 64.3696 27.4022V24.0143C64.3444 23.153 64.5194 22.2979 64.88 21.5204C65.201 20.8572 65.7095 20.3098 66.3385 19.9504C67.0621 19.5693 67.8668 19.3808 68.6793 19.402C69.3831 19.3909 70.0782 19.5641 70.6992 19.9053C71.3002 20.2521 71.8029 20.7544 72.1577 21.3626C72.57 22.0694 72.8426 22.8531 72.9598 23.6688H70.619C70.5465 23.2978 70.408 22.9438 70.2107 22.6246C70.045 22.3519 69.8172 22.125 69.5471 21.9636C69.2789 21.805 68.9739 21.7245 68.6647 21.7307C68.2879 21.7191 67.915 21.8125 67.5854 22.0011C67.2911 22.1754 67.0547 22.4372 66.9073 22.7523C66.7433 23.1406 66.6637 23.561 66.6739 23.9843V27.3721C66.6644 27.7953 66.744 28.2156 66.9073 28.6041C67.0576 28.9171 67.2933 29.1782 67.5854 29.3553C67.915 29.5439 68.2879 29.6373 68.6647 29.6257C68.9752 29.6315 69.2819 29.5539 69.5543 29.4004C69.8283 29.2415 70.059 29.0141 70.2252 28.7393C70.4207 28.418 70.5544 28.061 70.619 27.6876H72.9598C72.8368 28.5029 72.562 29.286 72.1504 29.9938C71.794 30.5988 71.2916 31.0983 70.6919 31.4436C70.072 31.788 69.3762 31.9614 68.672 31.9469C67.8669 31.9855 67.0651 31.8177 66.3385 31.4586Z"
+            fill="#474747"
+          />
+          <path
+            d="M77.9062 19.5312H80.1669V31.8733H77.9062V19.5312ZM79.2699 27.0432L84.0755 19.5312H86.9122L79.5543 30.0479L79.2699 27.0432ZM81.2607 25.6234L83.2077 24.3539L87.4153 31.8658H84.7391L81.2607 25.6234Z"
+            fill="#474747"
+          />
+          <path
+            d="M95.2051 19.5312H96.6635L101.243 31.8733H98.8147L95.9343 23.445L93.0684 31.8733H90.6328L95.2051 19.5312ZM92.8205 27.6591H99.121V29.9127H92.8205V27.6591Z"
+            fill="#474747"
+          />
+          <path
+            d="M113.594 24.977V27.3808C113.61 28.2229 113.425 29.0562 113.055 29.8072C112.711 30.4897 112.182 31.0538 111.531 31.4298C110.826 31.8221 110.034 32.0189 109.234 32.0006C108.432 32.0167 107.638 31.8311 106.922 31.4598C106.276 31.1246 105.738 30.6024 105.376 29.9574C105.006 29.2683 104.817 28.4913 104.829 27.7038V24.0606C104.813 23.2208 104.999 22.39 105.369 21.6417C105.713 20.9593 106.246 20.3973 106.9 20.0266C107.601 19.631 108.391 19.4315 109.19 19.4482C109.874 19.444 110.55 19.6007 111.166 19.9065C111.764 20.2007 112.282 20.6418 112.676 21.191C113.088 21.7598 113.369 22.4172 113.5 23.1141H111.057C110.977 22.8597 110.836 22.6299 110.648 22.4455C110.461 22.252 110.234 22.1033 109.985 22.0098C109.73 21.9116 109.461 21.8607 109.19 21.8596C108.818 21.8517 108.451 21.945 108.125 22.13C107.819 22.3062 107.567 22.5662 107.396 22.8812C107.224 23.2407 107.139 23.6375 107.148 24.038V27.6813C107.142 28.0369 107.23 28.3875 107.403 28.6954C107.574 28.9934 107.828 29.2315 108.132 29.379C108.473 29.5412 108.844 29.6209 109.219 29.6119C109.592 29.6222 109.961 29.5343 110.291 29.3565C110.604 29.1903 110.859 28.9277 111.02 28.6053C111.193 28.2436 111.278 27.844 111.268 27.4409V27.2381H109.46V24.9845L113.594 24.977Z"
+            fill="#474747"
+          />
+          <path d="M121.028 31.8733H118.688V19.5312H121.028V31.8733Z" fill="#474747" />
+          <path
+            d="M126.547 19.5312H129.311L133.766 28.9887L133.569 29.2066V19.5312H135.757V31.8658H132.979L128.538 22.5586L128.735 22.3332V31.8658H126.547V19.5312Z"
+            fill="#474747"
+          />
+          <path
+            d="M149.891 24.977V27.3808C149.908 28.2239 149.72 29.058 149.344 29.8072C149 30.4897 148.471 31.0538 147.82 31.4298C147.118 31.8228 146.329 32.0196 145.53 32.0006C144.728 32.0183 143.934 31.8325 143.218 31.4598C142.57 31.1247 142.03 30.6027 141.665 29.9574C141.295 29.2683 141.106 28.4913 141.118 27.7038V24.0606C141.102 23.2208 141.288 22.39 141.658 21.6417C142.006 20.9624 142.538 20.4015 143.189 20.0266C143.89 19.631 144.68 19.4315 145.479 19.4482C146.163 19.444 146.839 19.6007 147.455 19.9065C148.054 20.2025 148.574 20.6432 148.972 21.191C149.379 21.762 149.658 22.4187 149.789 23.1141H147.353C147.27 22.8611 147.13 22.632 146.945 22.4455C146.754 22.2519 146.525 22.1032 146.274 22.0098C146.02 21.9109 145.75 21.86 145.479 21.8596C145.109 21.8516 144.744 21.9449 144.422 22.13C144.114 22.3039 143.861 22.5645 143.692 22.8812C143.518 23.2401 143.431 23.6369 143.437 24.038V27.6813C143.431 28.0369 143.519 28.3875 143.692 28.6954C143.866 28.9911 144.119 29.2285 144.422 29.379C144.761 29.542 145.133 29.6217 145.508 29.6119C145.878 29.6209 146.245 29.533 146.573 29.3565C146.884 29.1872 147.138 28.9254 147.302 28.6053C147.472 28.2424 147.556 27.8436 147.55 27.4409V27.2381H145.734V24.9845L149.891 24.977Z"
+            fill="#474747"
+          />
+          <path
+            d="M12.5365 31.8619H1.83841C1.35173 31.8619 0.88491 31.6631 0.540291 31.3091C0.195672 30.9551 0.00137479 30.4748 0 29.9735V14.9676C0 11.2656 1.86438 9.31302 3.0744 8.43568V2.06955C3.07577 1.56773 3.2699 1.08685 3.61438 0.732005C3.95885 0.377157 4.42566 0.177193 4.91281 0.175781H9.46207C9.94923 0.177193 10.416 0.377157 10.7605 0.732005C11.105 1.08685 11.2991 1.56773 11.3005 2.06955V8.43568C12.5053 9.31302 14.3697 11.2656 14.3697 14.9676V29.9735C14.3697 30.4743 14.1765 30.9546 13.8328 31.3088C13.489 31.6629 13.0227 31.8619 12.5365 31.8619ZM2.07729 29.722H12.2924V14.9676C12.2924 11.9023 10.6981 10.5113 9.74771 9.95498L9.22839 9.64471V2.31565H5.15689V9.64471L4.63757 9.95498C3.68721 10.49 2.08769 11.9023 2.08769 14.9676L2.07729 29.722Z"
+            fill="#474747"
+          />
+          <path
+            d="M26.9131 31.8645H22.9922V29.7246H26.9131C26.9503 29.7252 26.9864 29.712 27.015 29.6874C27.0436 29.6629 27.0627 29.6287 27.0689 29.5909L28.9644 18.3566H31.3689V15.7727H23.0597V13.6328H31.8882C32.3101 13.6328 32.7149 13.8051 33.0137 14.112C33.3126 14.4188 33.4811 14.8352 33.4825 15.2698V18.8595C33.4811 19.2941 33.3126 19.7105 33.0137 20.0173C32.7149 20.3241 32.3101 20.4965 31.8882 20.4965H30.7145L29.1202 29.9493C29.0327 30.4864 28.7627 30.9739 28.3583 31.3248C27.954 31.6756 27.4417 31.8669 26.9131 31.8645Z"
+            fill="#474747"
+          />
+          <path
+            d="M18.0006 31.8616H15.3468V29.7218H18.0006C18.398 29.7228 18.7907 29.6326 19.15 29.4577C19.5093 29.2828 19.8263 29.0276 20.0779 28.7107C20.3283 28.3965 20.493 28.0193 20.5551 27.6178C20.6171 27.2164 20.5743 26.8051 20.431 26.4264L18.9302 22.4248C18.4944 21.2616 18.3091 20.0148 18.3871 18.7706C18.4651 17.5264 18.8045 16.3145 19.382 15.2188C19.7306 14.562 19.9016 13.8207 19.8769 13.0725C19.8522 12.3244 19.6329 11.5968 19.2418 10.9658L16.884 7.11406V4.15568H13.7266V2.01581H17.0035C17.2572 2.01227 17.5091 2.06024 17.7448 2.15699C17.9805 2.25375 18.1954 2.39742 18.3772 2.57974C18.559 2.76205 18.7042 2.97947 18.8044 3.21958C18.9046 3.4597 18.9579 3.71778 18.9613 3.97913V6.52022L20.9971 9.85308C21.5897 10.8045 21.9222 11.903 21.9597 13.0328C21.9971 14.1625 21.7382 15.2818 21.21 16.2727C20.7743 17.0961 20.5179 18.0075 20.4587 18.9434C20.3995 19.8792 20.5389 20.8172 20.8673 21.6919L22.3681 25.6935C22.6436 26.4196 22.7277 27.2079 22.6119 27.9783C22.496 28.7488 22.1844 29.4739 21.7086 30.0802C21.2564 30.6406 20.6894 31.0909 20.0484 31.3989C19.4073 31.7069 18.708 31.8649 18.0006 31.8616Z"
+            fill="#474747"
+          />
+        </svg>
+      </div>
+      <div class="header-title">
+        <p>客服</p>
+      </div>
+      <div class="header-close">
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 18 18"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          @click="toClose"
+        >
+          <rect
+            width=" 2.65472"
+            height="22.7999"
+            rx="1.32736"
+            transform="matrix(-0.707107 -0.707107 -0.707107 0.707107 18 1.87695)"
+            fill="#929292"
+          />
+          <rect
+            y="1.87695"
+            width="2.65472"
+            height="22.7999"
+            rx="1.32736"
+            transform="rotate(-45 0 1.87695)"
+            fill="#929292"
+          />
+        </svg>
+      </div>
     </div>
+    <slot name="content"></slot>
+
+    <div v-if="store.isEmailBox" class="email-box">
+      <div class="email-box-inp">
+        <div class="inp-top">
+          <span>电话</span>
+          <input v-model="phoneNumber" type="text" @input="validatePhoneNumber" />
+          <div v-if="phoneNumberError" :style="{ color: 'red' }" class="error">
+            {{ phoneNumberError }}
+          </div>
+        </div>
+        <div class="inp-bot">
+          <span>邮箱</span>
+          <input v-model="email" type="text" @input="validateEmail" />
+          <div v-if="emailError" :style="{ color: 'red' }" class="error">{{ emailError }}</div>
+        </div>
+      </div>
+      <p class="email-text">(choose one to fill in)</p>
+      <div class="email-box-btn">
+        <p class="box-btn-left" @click="store.toggleEmail">Cancel</p>
+        <p class="box-btn-right" @click="contactEmali">Contact Me</p>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { useMessageStore } from '@/store/useMessageStore';
-import { gsap } from 'gsap';
-import { ref } from 'vue';
+import { useMessageStore } from '@/store/useMessageStore'
+import { gsap } from 'gsap'
+import { ref } from 'vue'
 import { sendEmail } from '../../axios/axios'
 // import { nextTick } from 'vue';
 const phoneNumber = ref('')
 const email = ref('')
-const phoneNumberError = ref('');
-const emailError = ref('');
-const store = useMessageStore();
+const phoneNumberError = ref('')
+const emailError = ref('')
+const store = useMessageStore()
 
 const toClose = () => {
-    // 创建一个缩小动画，将消息容器从当前大小缩小为0，持续时间为1秒
-    gsap.to('.message-container', {
-        duration: 0.3,
-        y: -5,
-        onComplete: () => {
-            // 在动画完成后执行关闭窗口的逻辑
-            store.isChatVisible = !store.isChatVisible;
-            store.isEmailBox = false
-            // nextTick(() => {
-            //     // 执行另一个动画，例如放大动画
-            //     gsap.from('.right-box', {
-            //         duration: 1,
-            //         y: 10,
-            //     });
-            // })
-
-        },
-    });
-};
+  // 创建一个缩小动画，将消息容器从当前大小缩小为0，持续时间为1秒
+  gsap.to('.message-container', {
+    duration: 0.5,
+    x: 389,
+    onComplete: () => {
+      // 在动画完成后执行关闭窗口的逻辑
+      store.isChatVisible = !store.isChatVisible
+      store.isEmailBox = false
+      // nextTick(() => {
+      //     // 执行另一个动画，例如放大动画
+      //     gsap.from('.right-box', {
+      //         duration: 1,
+      //         y: 10,
+      //     });
+      // })
+    }
+  })
+}
 //发送邮箱手机
 const contactEmali = async () => {
-    const data = {
-        phone: phoneNumber.value,
-        email: email.value,
-        subject: '咨询',
-
+  const data = {
+    phone: phoneNumber.value,
+    email: email.value,
+    subject: '咨询'
+  }
+  try {
+    const res = await sendEmail(data)
+    if (res.data.code == 1) {
+      email.value = ''
+      email.value = ''
+      console.log('发送成功')
     }
-    try {
-        const res = await sendEmail(data)
-        if (res.data.code == 1) {
-            email.value = ""
-            email.value = ""
-            console.log('发送成功');
-        }
-    } catch (error) {
-        console.log(error);
-    }
-
+  } catch (error) {
+    console.log(error)
+  }
 }
 //验证
 const validatePhoneNumber = () => {
-    // Add your phone number validation logic here
-    if (!/^\d{11}$/.test(phoneNumber.value)) {
-        phoneNumberError.value = 'Invalid phone number';
-    } else {
-        phoneNumberError.value = '';
-    }
-};
+  // Add your phone number validation logic here
+  if (!/^\d{11}$/.test(phoneNumber.value)) {
+    phoneNumberError.value = 'Invalid phone number'
+  } else {
+    phoneNumberError.value = ''
+  }
+}
 
 const validateEmail = () => {
-    // Add your email validation logic here
-    if (!/^\S+@\S+\.\S+$/.test(email.value)) {
-        emailError.value = 'Invalid email address';
-    } else {
-        emailError.value = '';
-    }
-};
+  // Add your email validation logic here
+  if (!/^\S+@\S+\.\S+$/.test(email.value)) {
+    emailError.value = 'Invalid email address'
+  } else {
+    emailError.value = ''
+  }
+}
 </script>
 
 <style scoped>
 .message-container {
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    height: 90%;
-    right: 1%;
-    bottom: 2%;
-    max-width: 440px;
-    max-height: 616px;
-    width: 100%;
-    pointer-events: auto;
-    border-radius: 3%;
-    background: #FFFFFF !important;
-    z-index: 9999;
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 12px 48px 4px;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  right: 1%;
+  bottom: 2%;
+  max-width: 389px;
+  max-height: 530px;
+  width: 100%;
+  pointer-events: auto;
+  border-radius: 16px;
+  background: #ffffff !important;
+  z-index: 9999;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 12px 48px 4px;
 }
 
 .message-header {
-    display: flex;
+  display: flex;
 
-    padding: 0 40px;
-    height: 78px;
-    align-items: center;
-    justify-content: space-between;
-
+  padding: 0 20px;
+  height: 58px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header-img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
 }
 
 .header-img img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-
-
-.message-content {
-    display: flex;
-    flex-direction: column;
-    flex: 10 1 0;
-    position: relative;
-    height: 345px;
-
-}
-
-.message-bottom {
-    display: flex;
-    height: 100px;
-    flex-direction: column;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
 .header-title {
-    display: none;
+  display: none;
 }
 
 .header-title p {
-    color: #474747;
-    font-size: 15px;
-    font-weight: 700;
+  color: #474747;
+  font-size: 15px;
+  font-weight: 700;
 }
 
 .header-close {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .header-close img {
-    width: 20px;
-    height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .email-box {
-    width: 100%;
-    height: 423px;
-    position: absolute;
-    background-color: #ffffff;
-    bottom: 0;
-    border-radius: 15px;
-    z-index: 9999999999;
-    box-shadow: 0px 0px 12px rgba(12, 39, 50, 0.15);
+  width: 100%;
+  height: 423px;
+  position: absolute;
+  background-color: #ffffff;
+  bottom: 0;
+  border-radius: 15px;
+  z-index: 9999999999;
+  box-shadow: 0px 0px 12px rgba(12, 39, 50, 0.15);
 }
 
 .email-box-inp {
-    position: absolute;
-    top: 86px;
-    left: 25px;
-    width: 90%;
-    margin-bottom: 20px;
-
+  position: absolute;
+  top: 86px;
+  left: 25px;
+  width: 90%;
+  margin-bottom: 20px;
 }
 
 input:focus {
-    border-color: #F1FBFF;
-    border-top-color: #B2DFF1;
-    /* 设置边框颜色为蓝色 */
-    border-width: 1px;
-    /* 设置边框宽度 */
-    /* border-style: solid; */
-    /* 设置边框样式为实线 */
-    outline: none;
-    /* 去除默认的外部轮廓样式 */
-    border-radius: 0px;
+  border-color: #f1fbff;
+  border-top-color: #b2dff1;
+  /* 设置边框颜色为蓝色 */
+  border-width: 1px;
+  /* 设置边框宽度 */
+  /* border-style: solid; */
+  /* 设置边框样式为实线 */
+  outline: none;
+  /* 去除默认的外部轮廓样式 */
+  border-radius: 0px;
 }
 
 .inp-top {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .inp-bot,
 .inp-top {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid #9d9d9d;
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid #9d9d9d;
 }
 
-
 .email-box-inp span {
-    width: 37px;
-    height: 27px;
-    font-weight: 400;
-    font-size: 18px;
-    color: #929292;
-    line-height: 27px;
+  width: 37px;
+  height: 27px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #929292;
+  line-height: 27px;
 }
 
 .email-box-inp input {
-    flex: 2;
-    margin-left: 18px;
-    border: none;
-    height: 40px;
+  flex: 2;
+  margin-left: 18px;
+  border: none;
+  height: 40px;
 }
 
 .email-text {
-    position: absolute;
-    top: 50%;
-    /* 调整适当的底部距离 */
-    left: 50%;
-    /* 将文本水平居中 */
-    transform: translateX(-49%);
-    /* 通过平移来水平居中 */
-    width: 200px;
-    height: 27px;
+  position: absolute;
+  top: 50%;
+  /* 调整适当的底部距离 */
+  left: 50%;
+  /* 将文本水平居中 */
+  transform: translateX(-49%);
+  /* 通过平移来水平居中 */
+  width: 200px;
+  height: 27px;
 
-    font-family: 'Noto Sans TC';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 27px;
-    /* identical to box height, or 150% */
-    letter-spacing: 0.04em;
+  font-family: 'Noto Sans TC';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 27px;
+  /* identical to box height, or 150% */
+  letter-spacing: 0.04em;
 
-    /* 灰度/3 */
-    color: #929292;
+  /* 灰度/3 */
+  color: #929292;
 }
 
 .email-box-btn {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    bottom: 0;
-    width: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  bottom: 0;
+  width: 100%;
 }
 
 .box-btn-left,
 .box-btn-right {
-    text-align: center;
-    flex: 1;
-    height: 58px;
-    line-height: 58px;
-
-
+  text-align: center;
+  flex: 1;
+  height: 58px;
+  line-height: 58px;
 }
 
 .box-btn-left {
-    background-color: #ececec;
-    color: #474747;
-    border-bottom-left-radius: 15px;
+  background-color: #ececec;
+  color: #474747;
+  border-bottom-left-radius: 15px;
 }
 
 .box-btn-right {
-    background-color: #2daee4;
-    border-bottom-right-radius: 12px;
-    color: #FFFFFF;
+  background-color: #2daee4;
+  border-bottom-right-radius: 12px;
+  color: #ffffff;
 }
 
 @media screen and (max-width: 768px) {
+  /* 在小屏幕下应用的样式 */
+  .message-container {
+    bottom: 0;
+    right: 0;
+  }
 
-    /* 在小屏幕下应用的样式 */
-    .message-container {
-        bottom: 0;
-        right: 0;
-        height: 78%;
-    }
+  .header-img {
+    display: none;
+  }
 
-    .header-img {
-        display: none;
+  .close-svg {
+    width: 15px;
+  }
 
-    }
-
-    .message-header {
-        padding: 0 25px;
-        height: 51px;
-    }
-
-
-    .close-svg {
-        width: 15px;
-    }
-
-    .header-title {
-        display: flex;
-        flex: 10;
-        align-items: center;
-        justify-content: center;
-    }
-
-
+  .header-title {
+    display: flex;
+    flex: 10;
+    align-items: center;
+    justify-content: center;
+  }
 }
 </style>
-
-
-
-
-
-
-
-
-
+/* Rectangle 1257 */ position: absolute; width: 389px; height: 546px; background: #FFFFFF; /*
+一般投影 */ box-shadow: 0px 0px 12px rgba(12, 39, 50, 0.15); border-radius: 16px;

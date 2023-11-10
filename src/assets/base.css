@@ -13,3 +13,7 @@
   margin: 0;
   font-weight: normal;
 }
+html,
+body {
+  font-size: 62.5%;
+}
