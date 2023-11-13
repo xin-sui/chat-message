@@ -223,8 +223,8 @@ const validateEmail = () => {
   height: 90%;
   right: 1%;
   bottom: 2%;
-  max-width: 389px;
-  max-height: 530px;
+  max-width: 60em;
+  max-height: 80em;
   width: 100%;
   pointer-events: auto;
   border-radius: 16px;
@@ -399,10 +399,6 @@ input:focus {
     display: none;
   }
 
-  .close-svg {
-    width: 15px;
-  }
-
   .header-title {
     display: flex;
     flex: 10;
@@ -411,5 +407,3 @@ input:focus {
   }
 }
 </style>
-/* Rectangle 1257 */ position: absolute; width: 389px; height: 546px; background: #FFFFFF; /*
-一般投影 */ box-shadow: 0px 0px 12px rgba(12, 39, 50, 0.15); border-radius: 16px;

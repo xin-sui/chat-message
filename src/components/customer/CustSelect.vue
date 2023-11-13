@@ -87,8 +87,8 @@
             </svg>
           </div>
         </div>
-        <div class="consultation-box" @click="toCustomer">
-          <div class="consultation">
+        <el-row class="consultation-box">
+          <button @click="toCustomer" class="consultation">
             <div class="consultation-left">
               <svg
                 width="63"
@@ -137,8 +137,8 @@
                 stroke-dasharray="4 4"
               />
             </svg>
-          </div>
-        </div>
+          </button>
+        </el-row>
       </div>
       <div class="bottom-info">
         <svg
@@ -183,7 +183,7 @@ import { gsap } from 'gsap'
 const maxrecoon = ref(0)
 // const animate = gsap.timeline();
 const isButtonDisabled = ref(false)
-
+const loading = ref(false)
 if (store.setSocketUrl) {
   setSocketUrl(store.setSocketUrl)
 }
@@ -199,10 +199,11 @@ const toCustomer = async () => {
     console.log(socket.connect())
   }
   isButtonDisabled.value = true
-
+  loading.value = true
   // 使用 GSAP 添加进入动画效果
   // nextTick(() => {
   if (store.serverCode.code == 1) {
+    loading.value = false
     // animate.to(".message-container", {
     //   duration: 0.5,
     //   opacity: 0,
@@ -309,7 +310,6 @@ nextTick(() => {
   justify-content: center;
   /* 水平居中 */
   align-items: center;
-  width: 100%;
   border-radius: 10px;
 }
 
@@ -319,6 +319,7 @@ nextTick(() => {
   background-color: var(--app-color-button-bg);
   border-radius: 50px;
   display: flex;
+  border: none;
   /* 将左右边距调整为0，不需要设置右边距 */
 }
 
@@ -356,7 +357,9 @@ nextTick(() => {
 .message-bottom-right p:nth-child(1) {
   margin-right: 20px;
 }
-
+.el-loading-spinner {
+  top: 30% !important;
+}
 /* 或者使用媒体查询来根据屏幕宽度调整字体大小 */
 @media (max-width: 768px) {
   .title-img img {
