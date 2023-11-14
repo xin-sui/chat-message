@@ -28,7 +28,7 @@ export const useMessageStore = defineStore('message', () => {
       socket.disconnect()
     } else {
       toCustomer.value = false
-      userMessage.value = []
+      /* userMessage.value = []*/
     }
   })
 

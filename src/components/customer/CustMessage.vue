@@ -158,9 +158,7 @@ import emjioIcon from '@/assets/img/customerImg/expression.png'
 import downArrow from '@/assets/img/customerImg/down.png'
 let emojiIndex = ref('')
 emojiIndex.value = new EmojiIndex(data)
-socket.on('connect_error', (err) => {
-  console.warn(err)
-})
+
 const store = useMessageStore()
 const newMessage = ref('')
 const isShowEmojio = ref(false)
