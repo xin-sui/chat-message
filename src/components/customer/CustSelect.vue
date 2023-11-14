@@ -277,11 +277,11 @@ nextTick(() => {
 }*/
 
 .header-width {
-  width: 20px;
+  width: 1.25em;
 }
 
 .content-box {
-  padding: 0 35px;
+  padding: 0 2.1875em;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -326,14 +326,14 @@ nextTick(() => {
   justify-content: center;
   /* 水平居中 */
   align-items: center;
-  border-radius: 10px;
+  border-radius: 0.625em;
 }
 
 .consultation {
-  height: 88px;
-  width: 341px;
+  height: 5.5em;
+  width: 21.3125em;
   background-color: var(--app-color-button-bg);
-  border-radius: 50px;
+  border-radius: 3.125em;
   display: flex;
   border: none;
   /* 将左右边距调整为0，不需要设置右边距 */
@@ -345,22 +345,22 @@ nextTick(() => {
   justify-content: center;
   height: 100%;
   flex: 2;
-  margin-left: 35px;
+  margin-left: 2.1875em;
 }
 
 .consultation-top {
   display: flex;
   align-items: center;
-  font-size: 18px;
-  height: 27px;
+  font-size: 1.125em;
+  height: 1.6875em;
   color: #474747;
-  margin-bottom: 5px;
+  margin-bottom: 2em;
 }
 
 .bottom-info {
   display: flex;
-  padding: 0 60px;
-  height: 60px;
+  padding: 0 10em;
+  height: 10em;
   justify-content: space-between;
   align-items: center;
 }
@@ -371,7 +371,7 @@ nextTick(() => {
 }
 
 .message-bottom-right p:nth-child(1) {
-  margin-right: 20px;
+  margin-right: 1.25em;
 }
 .el-loading-spinner {
   top: 30% !important;
@@ -379,16 +379,16 @@ nextTick(() => {
 /* 或者使用媒体查询来根据屏幕宽度调整字体大小 */
 @media (max-width: 768px) {
   .title-img img {
-    width: 60px;
-    height: 50px;
+    width: 3.75em;
+    height: 3.125em;
   }
 
   .title-text p img {
-    height: 25px;
+    height: 1.5625em;
   }
 
   .consultation-top {
-    font-size: 17px;
+    font-size: 1.0625em;
   }
 }
 </style>

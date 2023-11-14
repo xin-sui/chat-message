@@ -223,7 +223,7 @@ const validateEmail = () => {
   max-height: 80em;
   width: 100%;
   pointer-events: auto;
-  border-radius: 16px;
+  border-radius: 3em;
   background: #ffffff !important;
   z-index: 9999;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 12px 48px 4px;
@@ -232,8 +232,8 @@ const validateEmail = () => {
 .message-header {
   display: flex;
 
-  padding: 0 20px;
-  height: 58px;
+  padding: 0 2.5em;
+  height: 8em;
   align-items: center;
   justify-content: space-between;
 }
@@ -244,44 +244,44 @@ const validateEmail = () => {
 
 .header-title {
   color: #474747;
-  font-size: 15px;
+  font-size: 0.9375em;
   font-weight: 700;
 }
 
 .email-box {
   width: 100%;
-  height: 423px;
+  height: 26.4375em;
   position: absolute;
   background-color: #ffffff;
   bottom: 0;
-  border-radius: 15px;
+  border-radius: 0.9375em;
   z-index: 9999999999;
-  box-shadow: 0px 0px 12px rgba(12, 39, 50, 0.15);
+  box-shadow: 0px 0px 0.75em rgba(12, 39, 50, 0.15);
 }
 
 .email-box-inp {
   position: absolute;
-  top: 86px;
-  left: 25px;
+  top: 5.375em;
+  left: 1.5625em;
   width: 90%;
-  margin-bottom: 20px;
+  margin-bottom: 1.25em;
 }
 
 input:focus {
   border-color: #f1fbff;
   border-top-color: #b2dff1;
   /* 设置边框颜色为蓝色 */
-  border-width: 1px;
+  border-width: 0.0625em;
   /* 设置边框宽度 */
   /* border-style: solid; */
   /* 设置边框样式为实线 */
   outline: none;
   /* 去除默认的外部轮廓样式 */
-  border-radius: 0px;
+  border-radius: 0em;
 }
 
 .inp-top {
-  margin-bottom: 25px;
+  margin-bottom: 1.5625em;
 }
 
 .inp-bot,
@@ -290,23 +290,23 @@ input:focus {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  border-bottom: 1px solid #9d9d9d;
+  border-bottom: 0.0625em solid #9d9d9d;
 }
 
 .email-box-inp span {
-  width: 37px;
-  height: 27px;
+  width: 2.3125em;
+  height: 1.6875em;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 1.125em;
   color: #929292;
-  line-height: 27px;
+  line-height: 1.6875em;
 }
 
 .email-box-inp input {
   flex: 2;
-  margin-left: 18px;
+  margin-left: 1.125em;
   border: none;
-  height: 40px;
+  height: 2.5em;
 }
 
 .email-text {
@@ -317,14 +317,14 @@ input:focus {
   /* 将文本水平居中 */
   transform: translateX(-49%);
   /* 通过平移来水平居中 */
-  width: 200px;
-  height: 27px;
+  width: 12.5em;
+  height: 1.6875em;
 
   font-family: 'Noto Sans TC';
   font-style: normal;
   font-weight: 400;
-  font-size: 18px;
-  line-height: 27px;
+  font-size: 1.125em;
+  line-height: 1.6875em;
   /* identical to box height, or 150% */
   letter-spacing: 0.04em;
 
@@ -345,23 +345,23 @@ input:focus {
 .box-btn-right {
   text-align: center;
   flex: 1;
-  height: 58px;
-  line-height: 58px;
+  height: 3.625em;
+  line-height: 3.625em;
 }
 
 .box-btn-left {
   background-color: #ececec;
   color: #474747;
-  border-bottom-left-radius: 15px;
+  border-bottom-left-radius: 0.9375em;
 }
 
 .box-btn-right {
   background-color: #2daee4;
-  border-bottom-right-radius: 12px;
+  border-bottom-right-radius: 0.75em;
   color: #ffffff;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 48em) {
   /* 在小屏幕下应用的样式 */
   .message-container {
     bottom: 0;

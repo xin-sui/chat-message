@@ -2,7 +2,6 @@
   <div v-if="store.isChatVisible" @click="toggleSelect" class="message-icon right-box">
     <slot name="cust-icon"></slot>
     <div class="messsage-btn-img">
-
       <img v-if="props.custIcon" :src="props.custIcon" alt="" />
       <img v-else src="../../src/assets/img/customerImg/custtomer.png" alt="" />
     </div>
@@ -42,14 +41,16 @@ const toggleSelect = () => {
       '.message-container',
       { opacity: 0, x: 200 },
       {
-        duration: 0.5, opacity: 1, x: 0, onComplete: () => {
+        duration: 0.5,
+        opacity: 1,
+        x: 0,
+        onComplete: () => {
           // 在动画完成后，可以添加其他逻辑
-
         }
-      });
-  });
+      }
+    )
+  })
 }
-
 </script>
 
 <style scoped>
@@ -61,7 +62,6 @@ const toggleSelect = () => {
 }
 
 .messsage-btn-img {
-
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,8 +69,8 @@ const toggleSelect = () => {
 }
 
 .messsage-btn-img img {
-  width: 92px;
-  height: 142px;
+  width: 5.6875em;
+  height: 8.875em;
   object-fit: contain;
 }
 
