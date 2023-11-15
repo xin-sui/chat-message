@@ -308,7 +308,9 @@ socket.on('gpt message', async (stream) => {
   /*white-space: pre-wrap;*/
   word-wrap: break-word;
 }
-
+.message-content {
+  width: 80%;
+}
 .message-text-right {
   border-radius: 1.5em 0em 1.5em 1.5em;
   background-color: #ffffff;
