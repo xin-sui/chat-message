@@ -250,21 +250,23 @@ const validateEmail = () => {
 
 .email-box {
   width: 100%;
-  height: 26.4375em;
+  height: 65%;
   position: absolute;
   background-color: #ffffff;
   bottom: 0;
-  border-radius: 0.9375em;
+  border-radius: 3em;
   z-index: 9999999999;
   box-shadow: 0px 0px 0.75em rgba(12, 39, 50, 0.15);
 }
 
 .email-box-inp {
+  display: flex;
   position: absolute;
-  top: 5.375em;
-  left: 1.5625em;
-  width: 90%;
-  margin-bottom: 1.25em;
+  top: 30%;
+  /* left: 15%; */
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
 }
 
 input:focus {
@@ -291,44 +293,38 @@ input:focus {
   align-items: center;
   justify-content: center;
   border-bottom: 0.0625em solid #9d9d9d;
+  width: 70%;
 }
 
 .email-box-inp span {
-  width: 2.3125em;
+  width: 3.3125em;
   height: 1.6875em;
   font-weight: 400;
-  font-size: 1.125em;
+  font-size: 3em;
   color: #929292;
   line-height: 1.6875em;
 }
 
 .email-box-inp input {
-  flex: 2;
   margin-left: 1.125em;
   border: none;
   height: 2.5em;
+  width: 80%;
 }
 
 .email-text {
   position: absolute;
-  top: 50%;
-  /* 调整适当的底部距离 */
+  top: 56%;
   left: 50%;
-  /* 将文本水平居中 */
   transform: translateX(-49%);
-  /* 通过平移来水平居中 */
-  width: 12.5em;
+  /* width: 20.5em; */
   height: 1.6875em;
-
   font-family: 'Noto Sans TC';
   font-style: normal;
   font-weight: 400;
-  font-size: 1.125em;
+  font-size: 2.125em;
   line-height: 1.6875em;
-  /* identical to box height, or 150% */
   letter-spacing: 0.04em;
-
-  /* 灰度/3 */
   color: #929292;
 }
 
@@ -345,19 +341,19 @@ input:focus {
 .box-btn-right {
   text-align: center;
   flex: 1;
-  height: 3.625em;
-  line-height: 3.625em;
+  height: 8.625em;
+  line-height: 8.625em;
 }
 
 .box-btn-left {
   background-color: #ececec;
   color: #474747;
-  border-bottom-left-radius: 0.9375em;
+  border-bottom-left-radius: 3em;
 }
 
 .box-btn-right {
   background-color: #2daee4;
-  border-bottom-right-radius: 0.75em;
+  border-bottom-right-radius: 3em;
   color: #ffffff;
 }
 

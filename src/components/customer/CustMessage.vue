@@ -86,6 +86,7 @@
           </svg>
 
           <svg
+            @click="store.toggleEmail"
             width="20"
             height="14"
             viewBox="0 0 20 14"
@@ -309,7 +310,7 @@ socket.on('gpt message', async (stream) => {
   word-wrap: break-word;
 }
 .message-content {
-  width: 80%;
+  max-width: 80%;
 }
 .message-text-right {
   border-radius: 1.5em 0em 1.5em 1.5em;
