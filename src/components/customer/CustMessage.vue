@@ -8,6 +8,7 @@
         viewBox="0 0 22 22"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        style="cursor: pointer"
       >
         <path
           d="M7.8125 11.0006L17.1842 2.25369C17.7365 1.73726 17.7365 0.901474 17.1842 0.3867C16.6318 -0.1289 15.7357 -0.1289 15.1833 0.3867L4.81207 10.0673C4.26056 10.5829 4.26056 11.4191 4.81207 11.9331L15.1833 21.6133C15.4604 21.8711 15.8224 22 16.1846 22C16.5467 22 16.9088 21.8711 17.1842 21.6125C17.7365 21.0969 17.7365 20.2623 17.1842 19.7467L7.8125 11.0006Z"
@@ -87,6 +88,7 @@
 
           <svg
             @click="store.toggleEmail"
+            style="cursor: pointer"
             width="20"
             height="14"
             viewBox="0 0 20 14"
@@ -121,7 +123,7 @@
       </div>
       <div class="bottom-box">
         <img
-          style="width: 3.5em; height: 3.5em"
+          style="width: 2.5em; height: 2.5em"
           :class="{ 'bottom-emoji': switchICon, 'bottom-dwon': !switchICon }"
           :src="switchICon"
           alt=""
@@ -288,8 +290,8 @@ socket.on('gpt message', async (stream) => {
 }
 
 .avatar {
-  width: 7.125em;
-  height: 7.125em;
+  width: 5.125em;
+  height: 5.125em;
   margin-right: 0.5em;
   margin-left: 0.5em;
 }
@@ -336,7 +338,7 @@ socket.on('gpt message', async (stream) => {
 
 .bottom-box {
   display: flex;
-  height: 9em;
+  height: 5em;
   align-items: center;
   position: relative;
 }
@@ -345,9 +347,9 @@ socket.on('gpt message', async (stream) => {
   width: 100%;
   height: 100%;
   border: none;
-  padding-left: 7em;
+  padding-left: 5em;
   border-radius: 0 0 3em 3em;
-  width: 75%;
+  width: 67%;
 }
 
 .bottom-inp::-ms-input-placeholder {
@@ -377,6 +379,7 @@ socket.on('gpt message', async (stream) => {
 .bottom-dwon {
   position: absolute;
   left: 2em;
+  cursor: pointer;
   /* 调整图标在输入框内的位置 */
   /* 其他样式 */
 }
@@ -388,7 +391,7 @@ socket.on('gpt message', async (stream) => {
 
 .send-container {
   position: absolute;
-  right: 3em;
+  right: 2em;
   /* 调整图像容器的位置
   top: 50%;
     transform: translateY(-50%);
@@ -398,16 +401,17 @@ socket.on('gpt message', async (stream) => {
   /* 圆角 */
   background-color: var(--app-color-button-bg);
   /* 背景颜色 */
-  width: 12em;
-  height: 5em;
+  width: 10em;
+  height: 4em;
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .bottom-send {
-  width: 3.5em;
-  height: 3.5em;
+  width: 2.5em;
+  height: 2.5em;
 }
 
 input:focus {
@@ -479,14 +483,14 @@ input:focus {
   }
 
   .bottom-box {
+    height: 8em;
     border-top: none;
     margin: 0 3em;
   }
 
   .bottom-inp {
     width: 100%;
-    height: 6.5em;
-    padding-left: 6em;
+    height: 4em;
     background-color: #f0f0f0 !important;
     border-radius: 3.125em;
   }
@@ -498,8 +502,8 @@ input:focus {
 
   .send-container {
     right: 0;
-    width: 13em;
-    height: 6em;
+    width: 10em;
+    height: 4em;
   }
   .chat-function {
     padding: 0.625em 3em;

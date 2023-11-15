@@ -90,13 +90,14 @@
         />
       </svg>
 
-      <div class="header-title">客服</div>
+      <!-- <div class="header-title">客服</div> -->
       <svg
         width="18"
         height="18"
         viewBox="0 0 18 18"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        style="cursor: pointer"
         @click="toClose"
       >
         <rect
@@ -123,14 +124,14 @@
         <div class="inp-top">
           <span>电话</span>
           <input v-model="phoneNumber" type="text" @input="validatePhoneNumber" />
-          <div v-if="phoneNumberError" :style="{ color: 'red' }" class="error">
+          <!-- <div v-if="phoneNumberError" :style="{ color: 'red' }" class="error">
             {{ phoneNumberError }}
-          </div>
+          </div> -->
         </div>
         <div class="inp-bot">
           <span>邮箱</span>
           <input v-model="email" type="text" @input="validateEmail" />
-          <div v-if="emailError" :style="{ color: 'red' }" class="error">{{ emailError }}</div>
+          <!-- <div v-if="emailError" :style="{ color: 'red' }" class="error">{{ emailError }}</div> -->
         </div>
       </div>
       <p class="email-text">(choose one to fill in)</p>
@@ -219,8 +220,8 @@ const validateEmail = () => {
   height: 90%;
   right: 1%;
   bottom: 2%;
-  max-width: 60em;
-  max-height: 80em;
+  max-width: 40em;
+  max-height: 50em;
   width: 100%;
   pointer-events: auto;
   border-radius: 3em;
@@ -233,7 +234,7 @@ const validateEmail = () => {
   display: flex;
 
   padding: 0 2.5em;
-  height: 8em;
+  height: 5em;
   align-items: center;
   justify-content: space-between;
 }
@@ -297,10 +298,10 @@ input:focus {
 }
 
 .email-box-inp span {
-  width: 3.3125em;
+  width: 2.3125em;
   height: 1.6875em;
   font-weight: 400;
-  font-size: 3em;
+  font-size: 2em;
   color: #929292;
   line-height: 1.6875em;
 }
@@ -314,7 +315,7 @@ input:focus {
 
 .email-text {
   position: absolute;
-  top: 56%;
+  top: 60%;
   left: 50%;
   transform: translateX(-49%);
   /* width: 20.5em; */
@@ -322,7 +323,7 @@ input:focus {
   font-family: 'Noto Sans TC';
   font-style: normal;
   font-weight: 400;
-  font-size: 2.125em;
+  font-size: 1.5em;
   line-height: 1.6875em;
   letter-spacing: 0.04em;
   color: #929292;
@@ -341,8 +342,9 @@ input:focus {
 .box-btn-right {
   text-align: center;
   flex: 1;
-  height: 8.625em;
-  line-height: 8.625em;
+  height: 5.625em;
+  line-height: 5.625em;
+  cursor: pointer;
 }
 
 .box-btn-left {
@@ -360,12 +362,9 @@ input:focus {
 @media screen and (max-width: 48em) {
   /* 在小屏幕下应用的样式 */
   .message-container {
+    border-radius: 2em 2em 0 0;
     bottom: 0;
     right: 0;
-  }
-
-  .header-icon {
-    display: none;
   }
 
   .header-title {

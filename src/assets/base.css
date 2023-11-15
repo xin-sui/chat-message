@@ -1,10 +1,6 @@
 /* color palette from <https://github.com/vuejs/theme> */
 
 /* semantic color variables for this project */
-:root {
-  --app-color-button-bg: #33baea
-    /* 声明 --svg-fill-color 并将它初始化为 --app-color-button-icon-1 的值 */;
-}
 
 *,
 *::before,
@@ -13,10 +9,14 @@
   margin: 0;
   font-weight: normal;
 }
-html,
-body {
-  font-size: 62.5%;
-}
+
 p {
   margin: 0 !important;
+}
+:root {
+  --app-color-button-bg: #33baea;
+  --app-color-button-bg-hover: #cccc;
+}
+html {
+  font-size: 62.5% !important;
 }
