@@ -345,6 +345,7 @@ socket.on('gpt message', async (stream) => {
   border: none;
   background-color: #dcf2f8;
   padding-left: 1.5em;
+  font-size: small !important;
 }
 
 .bottom-inp::-ms-input-placeholder {
@@ -377,7 +378,9 @@ socket.on('gpt message', async (stream) => {
   justify-content: center;
   cursor: pointer;
 }
-
+.send-container:hover {
+  background-color: var(--app-color-button-bg-hover);
+}
 input:focus {
   border-color: #f1fbff;
   border-top-color: #b2dff1;

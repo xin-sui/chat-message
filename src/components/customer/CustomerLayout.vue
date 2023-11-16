@@ -120,14 +120,14 @@
     <div v-if="store.isEmailBox" class="email-box">
       <div class="email-box-inp">
         <div class="inp-top">
-          <span>电话</span>
+          <span>Phone</span>
           <input v-model="phoneNumber" type="text" @input="validatePhoneNumber" />
           <!-- <div v-if="phoneNumberError" :style="{ color: 'red' }" class="error">
             {{ phoneNumberError }}
           </div> -->
         </div>
         <div class="inp-bot">
-          <span>邮箱</span>
+          <span>Email</span>
           <input v-model="email" type="text" @input="validateEmail" />
           <!-- <div v-if="emailError" :style="{ color: 'red' }" class="error">{{ emailError }}</div> -->
         </div>
@@ -285,7 +285,7 @@ input:focus {
 }
 
 .email-box-inp span {
-  width: 2.3125em;
+  width: 3.3125em;
   height: 1.6875em;
   font-weight: 400;
   font-size: 2em;
