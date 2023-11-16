@@ -2,7 +2,7 @@
 
 /* semantic color variables for this project */
 
-*,
+/* *,
 *::before,
 *::after {
   box-sizing: border-box;
@@ -10,13 +10,24 @@
   font-weight: normal;
 }
 
-p {
-  margin: 0 !important;
-}
+
+
+/* html {
+  font-size: 62.5% !important;
+} */
 :root {
   --app-color-button-bg: #33baea;
   --app-color-button-bg-hover: #cccc;
+  --customer-border-radis: 2em;
+}
+p {
+  margin: 0 !important;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 html {
-  font-size: 62.5% !important;
+  font-size: 62.5%;
 }

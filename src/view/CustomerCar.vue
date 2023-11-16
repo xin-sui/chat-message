@@ -1,10 +1,10 @@
 <template>
   <div v-if="store.isChatVisible" @click="toggleSelect" class="message-icon right-box">
-    <slot name="cust-icon"></slot>
+    <!-- <slot name="cust-icon"></slot>
     <div class="messsage-btn-img">
       <img v-if="props.custIcon" :src="props.custIcon" alt="" />
       <img v-else src="../../src/assets/img/customerImg/custtomer.png" alt="" />
-    </div>
+    </div> -->
   </div>
   <div class="overlay" v-else>
     <transition name="select-message-fade" mode="out-in">
@@ -59,6 +59,7 @@ const toggleSelect = () => {
   right: 0%;
   bottom: 50%;
   pointer-events: all;
+  cursor: pointer;
 }
 
 .messsage-btn-img {
