@@ -181,7 +181,7 @@
         </svg>
 
         <svg
-          v-if="emailError"
+          v-if="emailError || phoneError"
           width="220"
           height="60"
           viewBox="0 0 288 60"
@@ -200,7 +200,7 @@
         <p class="box-btn-left" @click="toggleEmail">Cancel</p>
 
         <button class="box-btn-right" :disabled="isContactButton" @click="contactEmali">
-          <a-spin :spinning="spinning"> </a-spin>
+          <a-spin class="email-ant-spin" :spinning="spinning"> </a-spin>
           Contact Me
         </button>
       </div>
@@ -221,6 +221,7 @@ const store = useMessageStore()
 const sendEmailStatus = ref('')
 const spinning = ref(false)
 const isContactButton = ref(false)
+const phoneError = ref('')
 const toClose = () => {
   // 创建一个缩小动画，将消息容器从当前大小缩小为0，持续时间为1秒
   gsap.to('.message-container', {
@@ -257,23 +258,24 @@ const contactEmali = async () => {
     subject: '咨询'
   }
   try {
-    if (emailError.value == '') {
-      if (phoneNumber.value != '' && email.value != '') {
-        spinning.value = true
-        const res = await sendEmail(data)
-        isContactButton.value = true
-        if (res.data.code == 1) {
-          console.log('success')
-          sendEmailStatus.value = 'sucess'
-          phoneNumber.value = ''
-          email.value = ''
-        } else {
-          sendEmailStatus.value = 'error'
-          spinning.value = false
-        }
+    if (
+      (phoneNumber.value && phoneError.value === '') ||
+      (email.value && emailError.value === '')
+    ) {
+      spinning.value = true
+      const res = await sendEmail(data)
+      isContactButton.value = true
+      if (res.data.code == 1) {
+        console.log('success')
+        sendEmailStatus.value = 'sucess'
+        phoneNumber.value = ''
+        email.value = ''
+      } else {
+        sendEmailStatus.value = 'error'
         spinning.value = false
-        isContactButton.value = false
       }
+      spinning.value = false
+      isContactButton.value = false
     }
   } catch (error) {
     console.log(error)
@@ -285,15 +287,18 @@ const toggleEmail = () => {
   phoneNumber.value = ''
   email.value = ''
   emailError.value = ''
+  phoneError.value = ''
+  isContactButton.value = false
+  spinning.value = false
 }
 //验证
 const validatePhoneNumber = () => {
   sendEmailStatus.value = ''
   // Add your phone number validation logic here
   if (!/^\d{11}$/.test(phoneNumber.value)) {
-    emailError.value = 'Invalid phone number'
+    phoneError.value = 'Invalid phone number'
   } else {
-    emailError.value = ''
+    phoneError.value = ''
   }
 }
 

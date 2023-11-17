@@ -16,8 +16,8 @@
   font-size: 62.5% !important;
 } */
 :root {
-  /* --app-color-button-bg: #33baea;
-  --app-color-button-bg-hover: #cccc; */
+  --app-color-button-bg: #33baea;
+  --app-color-button-bg-hover: #cccc;
   --customer-border-radis: 2em;
 }
 p {
@@ -30,4 +30,12 @@ p {
 }
 html {
   font-size: 62.5%;
+}
+.ant-spin-dot-item {
+  background-color: var(
+    --app-color-button-bg-hover
+  ) !important; /* 这里修改 Spin 的点的颜色为红色 */
+}
+.ant-spin-text {
+  color: var(--app-color-button-bg-hover);
 }
