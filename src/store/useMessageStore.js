@@ -17,9 +17,6 @@ export const useMessageStore = defineStore('message', () => {
   }) //接收服务器反馈状态0不放行 1放行
   let isEmailBox = ref(false)
   let setSocketUrl = ref('')
-  const toggleEmail = () => {
-    isEmailBox.value = !isEmailBox.value
-  }
 
   watch(serverCode.value, (newQuestion) => {
     if (newQuestion.code == 0) {

@@ -197,8 +197,10 @@
       </div>
 
       <div class="email-box-btn">
-        <p class="box-btn-left" @click="store.toggleEmail">Cancel</p>
+        <p class="box-btn-left" @click="toggleEmail">Cancel</p>
+
         <button class="box-btn-right" :disabled="isContactButton" @click="contactEmali">
+          <a-spin :spinning="spinning"> </a-spin>
           Contact Me
         </button>
       </div>
@@ -217,7 +219,7 @@ const email = ref('')
 const emailError = ref('')
 const store = useMessageStore()
 const sendEmailStatus = ref('')
-
+const spinning = ref(false)
 const isContactButton = ref(false)
 const toClose = () => {
   // 创建一个缩小动画，将消息容器从当前大小缩小为0，持续时间为1秒
@@ -246,23 +248,33 @@ const contactEmali = async () => {
     subject: '咨询'
   }
   try {
-    const res = await sendEmail(data)
-    isContactButton.value = true
-    if (res.data.code == 1) {
-      console.log('success')
-      sendEmailStatus.value = 'sucess'
-      phoneNumber.value = ''
-      email.value = ''
-    } else {
-      sendEmailStatus.value = 'error'
+    if (emailError.value == '') {
+      if (phoneNumber.value != '' && email.value != '') {
+        spinning.value = true
+        const res = await sendEmail(data)
+        isContactButton.value = true
+        if (res.data.code == 1) {
+          console.log('success')
+          sendEmailStatus.value = 'sucess'
+          phoneNumber.value = ''
+          email.value = ''
+        } else {
+          sendEmailStatus.value = 'error'
+          spinning.value = false
+        }
+        spinning.value = false
+        isContactButton.value = false
+      }
     }
-
-    isContactButton.value = false
   } catch (error) {
     console.log(error)
   }
 }
-
+const toggleEmail = () => {
+  store.isEmailBox = !store.isEmailBox
+  phoneNumber.value = ''
+  email.value = ''
+}
 //验证
 const validatePhoneNumber = () => {
   sendEmailStatus.value = ''
