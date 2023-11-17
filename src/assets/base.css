@@ -16,8 +16,8 @@
   font-size: 62.5% !important;
 } */
 :root {
-  --app-color-button-bg: #33baea;
-  --app-color-button-bg-hover: #cccc;
+  /* --app-color-button-bg: #33baea;
+  --app-color-button-bg-hover: #cccc; */
   --customer-border-radis: 2em;
 }
 p {

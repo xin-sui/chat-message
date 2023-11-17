@@ -245,6 +245,7 @@ watch(sendEmailStatus, (newStatus) => {
     // 等待几秒钟后将 sendEmailStatus.value 设置为空字符串
     setTimeout(() => {
       sendEmailStatus.value = ''
+      store.isEmailBox = !store.isEmailBox
     }, 3000) // 这里的3000表示3秒，你可以根据需要调整时间
   }
 })
