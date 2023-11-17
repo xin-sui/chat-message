@@ -211,7 +211,7 @@
 <script setup>
 import { useMessageStore } from '@/store/useMessageStore'
 import { gsap } from 'gsap'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { sendEmail } from '../../axios/axios'
 // import { nextTick } from 'vue';
 const phoneNumber = ref('')
@@ -240,6 +240,14 @@ const toClose = () => {
     }
   })
 }
+watch(sendEmailStatus, (newStatus) => {
+  if (newStatus == 'sucess') {
+    // 等待几秒钟后将 sendEmailStatus.value 设置为空字符串
+    setTimeout(() => {
+      sendEmailStatus.value = ''
+    }, 3000) // 这里的3000表示3秒，你可以根据需要调整时间
+  }
+})
 //发送邮箱手机
 const contactEmali = async () => {
   const data = {
@@ -271,9 +279,11 @@ const contactEmali = async () => {
   }
 }
 const toggleEmail = () => {
+  console.log(store.isEmailBox)
   store.isEmailBox = !store.isEmailBox
   phoneNumber.value = ''
   email.value = ''
+  emailError.value = ''
 }
 //验证
 const validatePhoneNumber = () => {

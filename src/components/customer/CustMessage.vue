@@ -64,7 +64,7 @@
         </div>
         <div class="chat-function-right">
           <svg
-            @click="store.toggleEmail"
+            @click="toggleEmail"
             style="cursor: pointer"
             width="20"
             height="14"
@@ -202,7 +202,9 @@ const sendMessage = () => {
     newMessage.value = ''
   }
 }
-
+const toggleEmail = () => {
+  store.isEmailBox = !store.isEmailBox
+}
 const goBack = () => {
   if (store.isEmailBox == false) {
     store.toCustomer = true
