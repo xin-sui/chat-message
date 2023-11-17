@@ -36,7 +36,6 @@ export const useMessageStore = defineStore('message', () => {
     userMessage,
     serverCode,
     chatContainerRef,
-    toggleEmail,
     isEmailBox,
     setSocketUrl
   }
