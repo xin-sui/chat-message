@@ -4,9 +4,12 @@
       <div class="header-width"></div>
     </template>
     <template #content>
+      <!-- 内容区 -->
       <div class="content-box">
+        <!-- 文字区 -->
         <div class="content-title">
           <div class="title-img">
+            <!-- wechat图标 -->
             <svg
               class="svg-chat"
               width="81"
@@ -37,6 +40,7 @@
               />
             </svg>
           </div>
+          <!-- 第二部分 -->
           <div class="title-text">
             <!-- <img src="../../assets/img//customerImg/title-text-img.png" alt="" srcset=""> -->
             <svg
@@ -54,7 +58,6 @@
               />
             </svg>
 
-            <!-- <img src="../../assets/img//customerImg/title-text-img2.png" alt="" srcset=""> -->
             <svg
               class="svg-help"
               width="254"
@@ -87,10 +90,12 @@
             </svg>
           </div>
         </div>
+        <!-- 进入聊天 -->
         <div class="consultation-box">
           <a-spin :spinning="isButtonDisabled" tip="Please wait">
             <button :disabled="isButtonDisabled" @click="toCustomer" class="consultation">
               <div class="consultation-left">
+                <!-- start -->
                 <svg
                   width="63"
                   height="32"
@@ -104,7 +109,7 @@
                     fill="#FFFFFF"
                   />
                 </svg>
-
+                <!-- consultation -->
                 <svg
                   width="159"
                   height="32"
@@ -151,7 +156,6 @@
             fill="#929292"
           />
         </svg>
-
         <div class="message-bottom-right">
           <svg
             width="26"
@@ -178,48 +182,44 @@ import { useMessageStore } from '@/store/useMessageStore'
 import { socket, setSocketUrl } from '@/socket'
 const store = useMessageStore()
 import { gsap } from 'gsap'
-const maxrecoon = ref(0)
-// const animate = gsap.timeline();
+
+//客户端浏览器指纹识别库
+import FingerprintJS from '@fingerprintjs/fingerprintjs'
+const fpPromise = FingerprintJS.load()
+
+//进入聊天按钮状态
 const isButtonDisabled = ref(false)
+//加载状态
 const loading = ref(false)
+//设置服务器连接地址
 if (store.setSocketUrl) {
   setSocketUrl(store.setSocketUrl)
 }
+// 进入聊天按钮
 const toCustomer = async () => {
-  const userID = localStorage.getItem('userID')
-  console.log(userID)
+  // 获取浏览器唯一标识用作用户userID
+  const fp = await fpPromise
+  const result = await fp.get()
+  const userID = result.visitorId
+  isButtonDisabled.value = true
   if (userID) {
-    //   this.usernameAlreadySelected = true;
     socket.auth = { userID }
     socket.connect()
-  } else {
-    socket.connect()
-    console.log(socket.connect())
+    // 服务器如果返回1则进入聊天
+    if (store.serverCode.code == 1) {
+      loading.value = false
+      store.toCustomer = false
+      isButtonDisabled.value = false
+    } else {
+      isButtonDisabled.value = false
+    }
   }
-  // 使用 GSAP 添加进入动画效果
-  // nextTick(() => {
-  if (store.serverCode.code == 1) {
-    loading.value = false
-    // animate.to(".message-container", {
-    //   duration: 0.5,
-    //   opacity: 0,
-    //   y: -5,
-    //   onComplete: () => {
-    // 在动画完成后执行关闭窗口的逻辑
-    store.toCustomer = false
-    // gsap.set(".message-container", { y: 0 });
-    isButtonDisabled.value = true
-    // },
-    // });
-  } else {
-    isButtonDisabled.value = false
-  }
-
-  // });
 }
+//用户信息
 socket.on('session', (res) => {
   localStorage.setItem('userID', res.userID)
 })
+//超过5分钟服务器发送消息
 socket.on('time passes', ({ msg, code }) => {
   store.serverCode.msg = msg
   store.serverCode.code = code
@@ -231,28 +231,22 @@ socket.on('time passes', ({ msg, code }) => {
     isButtonDisabled.value = true
   }
 })
+//接收用户聊天信息
 socket.on('user message', (msg) => {
   for (const key in msg) {
     store.userMessage.push(msg[key])
   }
 })
+//socket连接失败触发
 socket.on('connect_error', (error) => {
-  console.error('连接失败：', error)
-  // 在这里处理连接失败的逻辑
-  isButtonDisabled.value = true
-  if (maxrecoon.value < 5) {
-    let reconntect = setInterval(() => {
-      maxrecoon.value += 1
-      socket.connect()
-    }, 5000)
-    if (store.serverCode.value == 1) {
-      clearInterval(reconntect)
-    }
+  if (error) {
+    // 禁用按钮
+    isButtonDisabled.value = true
   } else {
     isButtonDisabled.value = false
   }
 })
-
+// 页面渲染之后播放动画
 nextTick(() => {
   // 使用GSAP添加进入动画到content-title和select-box元素
   gsap.fromTo('.content-title', { opacity: 0, x: -10 }, { duration: 0.5, opacity: 1, x: 0 })
