@@ -187,10 +187,9 @@ import { gsap } from 'gsap'
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
 const fpPromise = FingerprintJS.load()
 
-//进入聊天按钮状态
+//进入聊天按钮状态 加载
 const isButtonDisabled = ref(false)
-//加载状态
-const loading = ref(false)
+
 //设置服务器连接地址
 if (store.setSocketUrl) {
   setSocketUrl(store.setSocketUrl)
@@ -207,7 +206,6 @@ const toCustomer = async () => {
     socket.connect()
     // 服务器如果返回1则进入聊天
     if (store.serverCode.code == 1) {
-      loading.value = false
       store.toCustomer = false
       isButtonDisabled.value = false
     } else {
@@ -226,7 +224,6 @@ socket.on('time passes', ({ msg, code }) => {
   if (code == 0) {
     socket.disconnect()
   } else {
-    loading.value = false
     store.toCustomer = false
     isButtonDisabled.value = true
   }
@@ -243,8 +240,7 @@ socket.on('connect_error', (error) => {
   if (error) {
     // 禁用按钮
     isButtonDisabled.value = true
-  } else {
-    isButtonDisabled.value = false
+    store.serverCode.code = 0
   }
 })
 // 页面渲染之后播放动画
