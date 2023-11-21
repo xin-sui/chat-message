@@ -8,7 +8,7 @@
   </div>
   <div class="overlay" v-else>
     <transition name="select-message-fade" mode="out-in">
-      <component :is="store.toCustomer ? Select : Message"></component>
+      <CustMessage></CustMessage>
     </transition>
   </div>
 </template>
@@ -16,8 +16,8 @@
 export default { name: 'CustomerCar' }
 </script>
 <script setup>
-import Select from '../components/customer/CustSelect.vue'
-import Message from '../components/customer/CustMessage.vue'
+// import Select from '../components/customer/CustSelect.vue'
+import CustMessage from '../components/customer/CustMessage.vue'
 import { nextTick } from 'vue'
 import { useMessageStore } from '../store/useMessageStore'
 import { gsap } from 'gsap'

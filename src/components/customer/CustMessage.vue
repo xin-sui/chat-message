@@ -1,7 +1,8 @@
 <template>
   <CustomerLayout>
     <template #headerLeft>
-      <svg
+      <div></div>
+      <!-- <svg
         @click="goBack"
         style="cursor: pointer"
         width="9"
@@ -14,12 +15,12 @@
           d="M2.32777 7.00038L8.71754 1.43417C9.09415 1.10553 9.09415 0.573666 8.71754 0.246082C8.34095 -0.0820272 7.72994 -0.0820272 7.35335 0.246082L0.282023 6.40647C-0.0940075 6.73458 -0.0940075 7.26671 0.282023 7.59379L7.35335 13.7539C7.54222 13.918 7.7891 14 8.03601 14C8.28293 14 8.52981 13.918 8.71754 13.7534C9.09415 13.4253 9.09415 12.8942 8.71754 12.5661L2.32777 7.00038Z"
           fill="#929292"
         />
-      </svg>
+      </svg> -->
     </template>
     <template #content>
       <div class="chat-container" ref="chatContainerRef" @change="showEmojiChange">
         <div
-          v-for="(message, index) in chatLog"
+          v-for="(message, index) in chatMesage"
           :key="index"
           class="message"
           :class="{ 'receiver-message': message.receiver, 'sender-message': !message.receiver }"
@@ -47,7 +48,7 @@
       <div class="emijon-box" v-show="isShowEmojio">
         <Picker :showPreview="false" :data="emojiIndex" set="twitter" @select="showEmoji" />
       </div>
-      <div class="chat-function functon-phone" :class="{ 'function-color': isShowEmojio }">
+      <div class="chat-function functon-phone" :class="{ 'function-color': showFunctionBackColor }">
         <div class="chat-function-left">
           <svg
             width="198"
@@ -187,10 +188,15 @@ emojiIndex.value = new EmojiIndex(data)
 
 const store = useMessageStore()
 const newMessage = ref('')
-const isShowEmojio = ref(false)
+//控制当表情框打开改变功能区背景颜色
+const showFunctionBackColor = ref(false)
+//控制表情框
 const isSwitchICon = ref(true)
+//聊天对话ref 控制发送消息到达最底部
 const chatContainerRef = ref(null)
-const chatLog = ref([])
+//聊天信息
+const chatMesage = ref([])
+//发送消息
 const sendMessage = () => {
   if (newMessage.value) {
     store.userMessage.push({
@@ -199,29 +205,27 @@ const sendMessage = () => {
       receiver: false
     })
     scrollToBottom()
+    //向后端发送private message 消息事件
     socket.emit('private message', newMessage.value)
     newMessage.value = ''
   }
 }
+//邮箱切换
 const toggleEmail = () => {
   store.isEmailBox = !store.isEmailBox
 }
-const goBack = () => {
-  if (store.isEmailBox == false) {
-    store.toCustomer = true
-  }
-}
 
+//选择表情
 const showEmoji = (emoji) => {
   console.log(emoji)
   newMessage.value += emoji.native
 }
-
+//显示表情
 const showEmojiChange = () => {
   isSwitchICon.value = !isSwitchICon.value
-  isShowEmojio.value = !isShowEmojio.value
+  showFunctionBackColor.value = !showFunctionBackColor.value
 }
-
+//发送消息到达聊天框最底部
 const scrollToBottom = () => {
   nextTick(() => {
     if (chatContainerRef.value) {
@@ -234,28 +238,16 @@ onMounted(() => {
   // 页面加载完成后滚动到底部
   scrollToBottom()
 })
-nextTick(() => {
-  chatLog.value = store.userMessage
-})
+//接收消息WhatsApp发送的消息
 socket.on('private message', (msg) => {
-  console.log(msg)
-  store.userMessage.push({
+  chatMesage.value.push({
     id: store.userMessage.length + 1,
     content: msg,
     receiver: true
   })
   scrollToBottom()
 })
-socket.on('gpt message', async (stream) => {
-  // 如果遇到换行符，将接收消息添加到消息数组中
-  chatLog.value.push({
-    id: chatLog.value.length + 1,
-    content: stream,
-    receiver: true
-  })
-
-  scrollToBottom()
-})
+//监听用户是否发送消息 如果发送则连接
 </script>
 
 <style scoped>
