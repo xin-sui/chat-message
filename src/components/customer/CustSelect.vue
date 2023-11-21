@@ -233,7 +233,7 @@ socket.on('time passes', ({ msg, code }) => {
 })
 //接收用户聊天信息
 socket.on('user message', (msg) => {
-  store.useMessageStore=[]
+  store.userMessage = []
   for (const key in msg) {
     store.userMessage.push(msg[key])
   }
