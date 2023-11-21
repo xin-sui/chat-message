@@ -196,22 +196,25 @@ if (store.setSocketUrl) {
 }
 // 进入聊天按钮
 const toCustomer = async () => {
-  // 获取浏览器唯一标识用作用户userID
-  const fp = await fpPromise
-  const result = await fp.get()
-  const userID = result.visitorId
   isButtonDisabled.value = true
-  if (userID) {
-    socket.auth = { userID }
-    socket.connect()
-    // 服务器如果返回1则进入聊天
-    if (store.serverCode.code == 1) {
-      store.toCustomer = false
-      isButtonDisabled.value = false
-    } else {
-      isButtonDisabled.value = false
+  setTimeout(async () => {
+    // 获取浏览器唯一标识用作用户userID
+    const fp = await fpPromise
+    const result = await fp.get()
+    const userID = result.visitorId
+
+    if (userID) {
+      socket.auth = { userID }
+      socket.connect()
+      // 服务器如果返回1则进入聊天
+      if (store.serverCode.code == 1) {
+        store.toCustomer = false
+        isButtonDisabled.value = false
+      } else {
+        isButtonDisabled.value = false
+      }
     }
-  }
+  }, 3000)
 }
 //用户信息
 socket.on('session', (res) => {
@@ -247,7 +250,6 @@ socket.on('connect_error', (error) => {
 nextTick(() => {
   // 使用GSAP添加进入动画到content-title和select-box元素
   gsap.fromTo('.content-title', { opacity: 0, x: -10 }, { duration: 0.5, opacity: 1, x: 0 })
-  gsap.fromTo('.select-customer-img', { opacity: 0, x: 50 }, { duration: 0.5, opacity: 1, x: 0 })
 })
 </script>
 

@@ -19,7 +19,7 @@
     <template #content>
       <div class="chat-container" ref="chatContainerRef" @change="showEmojiChange">
         <div
-          v-for="(message, index) in store.userMessage"
+          v-for="(message, index) in chatLog"
           :key="index"
           class="message"
           :class="{ 'receiver-message': message.receiver, 'sender-message': !message.receiver }"
@@ -190,6 +190,7 @@ const newMessage = ref('')
 const isShowEmojio = ref(false)
 const isSwitchICon = ref(true)
 const chatContainerRef = ref(null)
+const chatLog = ref([])
 const sendMessage = () => {
   if (newMessage.value) {
     store.userMessage.push({
@@ -233,6 +234,9 @@ onMounted(() => {
   // 页面加载完成后滚动到底部
   scrollToBottom()
 })
+nextTick(() => {
+  chatLog.value = store.userMessage
+})
 socket.on('private message', (msg) => {
   console.log(msg)
   store.userMessage.push({
@@ -244,8 +248,8 @@ socket.on('private message', (msg) => {
 })
 socket.on('gpt message', async (stream) => {
   // 如果遇到换行符，将接收消息添加到消息数组中
-  store.userMessage.push({
-    id: store.userMessage.length + 1,
+  chatLog.value.push({
+    id: chatLog.value.length + 1,
     content: stream,
     receiver: true
   })
