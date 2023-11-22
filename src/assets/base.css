@@ -39,3 +39,10 @@ html {
 .ant-spin-text {
   color: var(--app-color-button-bg-hover);
 }
+
+.alert .ant-alert-message {
+  text-align: center;
+}
+.ant-alert-with-description {
+  padding-block: 0;
+}
