@@ -1,31 +1,55 @@
 <template>
-  <div class="alert-box" :style="alertStyle">
+  <div class="alert-box" :class="[statusClass]">
     <p>{{ props.message }}</p>
     <slot name="description"></slot>
   </div>
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { gsap } from 'gsap'
+import { defineProps, computed, nextTick } from 'vue';
 
 const props = defineProps({
-  color: {
-    type: String,
-    default: '#9acc5b'
-  },
-  backColor: {
-    type: String,
-    default: '#F8FFF5'
-  },
   message: {
     type: String,
-    default: 'Success'
+    default: ''
+  },
+  status: {
+    type: String,
+    default: 'success'
   }
-})
-//提示框样式
-const alertStyle = reactive({
-  color: props.color,
-  backgroundColor: props.backColor
+});
+
+// 根据传入的 status 属性值计算动态类名
+const statusClass = computed(() => {
+  if (props.status === 'success') {
+    return 'success';
+  } else if (props.status === 'error') {
+    return 'error';
+  } else {
+    return 'success';
+  }
+});
+// 动画结束后隐藏元素
+const hideElement = () => {
+  // 隐藏alert-box元素
+  gsap.set('.alert-box', { display: 'none' });
+}
+// 页面渲染之后播放动画
+nextTick(() => {
+  // 使用GSAP添加进入动画到content-title和select-box元素
+  gsap.fromTo('.alert-box', { opacity: 0, y: -10 }, {
+    duration: 1,
+    opacity: 1,
+    y: 0,
+    onComplete: () => {
+      // 动画完成后，过几秒后消失
+      setTimeout(() => {
+        gsap.to('.alert-box', { duration: 1, opacity: 0, y: -10, onComplete: hideElement });
+      }, 3000); // 在这里设置你想要的等待时间，这里是5秒
+    }
+  });
+
 })
 </script>
 
@@ -44,5 +68,15 @@ const alertStyle = reactive({
   word-wrap: break-word;
   height: 3em;
   max-height: 8em;
+}
+
+.success {
+  color: #9acc5b;
+  background-color: #f8fff5;
+}
+
+.error {
+  color: #ff5b5b;
+  background-color: #fff5f5;
 }
 </style>

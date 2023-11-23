@@ -4,7 +4,7 @@ import img1 from '../assets/img/customerImg/customer-img.png'
 
 export const useMessageStore = defineStore('message', () => {
   const toCustomer = ref(true)
-  const isChatVisible = ref(true)
+  const showChatMessage = ref(true)
   const localImagePaths = img1
   const userMessage = ref([])
 
@@ -15,7 +15,7 @@ export const useMessageStore = defineStore('message', () => {
 
   return {
     toCustomer,
-    isChatVisible,
+    showChatMessage,
     localImagePaths,
     userMessage,
     isEmailBox,

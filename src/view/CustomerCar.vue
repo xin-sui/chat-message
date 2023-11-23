@@ -1,12 +1,12 @@
 <template>
-  <div v-if="store.isChatVisible" @click="toggleSelect" class="message-icon right-box">
+  <div v-if="store.showChatMessage" @click="toggleSelect" class="message-icon right-box">
     <slot name="cust-icon"></slot>
     <div class="messsage-btn-img">
       <img v-if="props.custIcon" :src="props.custIcon" alt="" />
       <img v-else src="../../src/assets/img/customerImg/custtomer.png" alt="" />
     </div>
   </div>
-  <div class="overlay" v-else>
+  <div class="overlay" v-show="!store.showChatMessage">
     <transition name="select-message-fade" mode="out-in">
       <CustMessage></CustMessage>
     </transition>
@@ -28,7 +28,7 @@ nextTick(() => {
   gsap.from('.right-box', { duration: 1, x: 200 })
 })
 const toggleSelect = () => {
-  store.isChatVisible = !store.isChatVisible
+  store.showChatMessage = !store.showChatMessage
   // nextTick(() => {
   //   gsap.to('.message-container', {
   //     duration: 1,
