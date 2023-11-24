@@ -13,7 +13,7 @@ export const useMessageStore = defineStore('message', () => {
   //设置接口
   let setSocketUrl = ref('')
   //切换表情
-  const toggleEmjiIcon = ref(true)
+  const toggleEmjiIcon = ref(false)
   const inputNewMessage = ref('')
   return {
     toCustomer,

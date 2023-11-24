@@ -1,7 +1,7 @@
 <template>
   <div
     class="message"
-    v-for="(message, index) in chatMesage"
+    v-for="(message, index) in store.userMessage"
     :key="index"
     :class="{ 'receiver-message': message.receiver, 'sender-message': !message.receiver }"
   >
@@ -27,15 +27,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
-const chatMesage = ref([])
+import { useMessageStore } from '@/store/useMessageStore'
+const store = useMessageStore()
+console.log(store.userMessage)
 </script>
 
 <style lang="scss" scoped>
 .message {
   display: flex;
-  flex: 1;
   align-items: flex-start;
   margin: 0.625em;
 }

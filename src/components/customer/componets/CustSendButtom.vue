@@ -80,7 +80,16 @@ const showEmojiChange = () => {
   store.toggleEmjiIcon = !store.toggleEmjiIcon
 }
 const sendMessage = () => {
-  socket.emit('')
+  console.log(store.inputNewMessage)
+  if (store.inputNewMessage) {
+    store.userMessage.push({
+      id: store.userMessage.length + 1,
+      content: store.inputNewMessage,
+      receiver: false
+    })
+    socket.emit('private message', store.inputNewMessage)
+    store.inputNewMessage = ''
+  }
 }
 </script>
 

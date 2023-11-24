@@ -216,7 +216,7 @@
       </div>
 
       <!-- 聊天对话 -->
-      <div v-show="!store.toggleEmjiIcon" class="emijon-box">
+      <div v-show="store.toggleEmjiIcon" class="emijon-box">
         <Picker :showPreview="false" :data="emojiIndex" set="twitter" @select="selectEmoji" />
       </div>
       <!-- 功能区 -->
@@ -409,13 +409,10 @@ import { gsap } from 'gsap'
 let emojiIndex = ref('')
 emojiIndex.value = new EmojiIndex(data)
 // //选择表情
-// const selectEmoji = (emoji) => {
-//   console.log(emoji)
-// }
-// //显示表情
-// const showEmojiChange = () => {
+const selectEmoji = (emoji) => {
+  store.inputNewMessage += emoji.native
+}
 
-// }
 //客户端浏览器指纹识别库
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
 const fpPromise = FingerprintJS.load()
@@ -446,15 +443,17 @@ const toStartMessage = async () => {
   const fp = await fpPromise
   const result = await fp.get()
   const userID = result.visitorId
+  console.log(111)
   if (userID) {
+    console.log(userID)
     // 获取userID成公连接服务器，获取当前人数
     socket.auth = { userID }
     socket.connect()
     //返回信息是否通过连接
-    console.log(111111)
     socket.on('no phoneID', (msg) => {
       isButtonDisabled.value = true
       isActive.value = true
+
       if (msg.code == 1) {
         showAlert.value = true
         alertMessage.value = 'Linked-Customer Service No.1'
@@ -472,15 +471,17 @@ const toStartMessage = async () => {
     alertMessage.value = 'Failed to get userID'
   }
 }
-
 //超过5分钟服务器发送消息
 socket.on('time passes', ({ msg, code }) => {
   if (code == 0) {
-    showAlert.value = true
-    showButtonChat.value = false
-    showChatRecord.value = false
-    alertMessage.value = msg
-    showTimeOut.value = true
+    showAlert.value = true //弹出提示
+    alertMessage.value = msg //返回到消息提示
+    showAlertStatus.value = 'error'
+    showButtonChat.value = false //切换按钮
+    showChatRecord.value = false //切换到首页
+    showTimeOut.value = true //显示超时下行文字
+    store.toggleEmjiIcon = false //关闭表情
+    socket.disconnect()
   }
 })
 
@@ -613,7 +614,6 @@ const toClose = () => {
   position: relative;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
   /* 添加滚动条 */
   flex: 1;
   background-color: #dcf2f8;
@@ -642,6 +642,8 @@ const toClose = () => {
   .chat-message-log {
     display: flex;
     flex: 1;
+    flex-direction: column;
+    overflow-y: auto;
   }
 }
 

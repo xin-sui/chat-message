@@ -1,5 +1,5 @@
 <template>
-  <div class="alert-box" :class="[statusClass]">
+  <div v-if="showAlert" class="alert-box" :class="[statusClass]">
     <p>{{ props.message }}</p>
     <slot name="description"></slot>
   </div>
@@ -7,8 +7,7 @@
 
 <script setup>
 import { gsap } from 'gsap'
-import { defineProps, computed, nextTick } from 'vue';
-
+import { defineProps, computed, nextTick } from 'vue'
 const props = defineProps({
   message: {
     type: String,
@@ -17,39 +16,49 @@ const props = defineProps({
   status: {
     type: String,
     default: 'success'
+  },
+  showAlert: {
+    type: Boolean,
+    default: false
   }
-});
+})
 
-// 根据传入的 status 属性值计算动态类名
+// 根据类型动态设置类名
 const statusClass = computed(() => {
-  if (props.status === 'success') {
-    return 'success';
-  } else if (props.status === 'error') {
-    return 'error';
-  } else {
-    return 'success';
+  return {
+    'alert-success': props.status === 'success',
+    'alert-error ': props.status === 'error'
+    // 可根据需要添加更多类型的类名
   }
-});
-// 动画结束后隐藏元素
-const hideElement = () => {
-  // 隐藏alert-box元素
-  gsap.set('.alert-box', { display: 'none' });
-}
-// 页面渲染之后播放动画
-nextTick(() => {
-  // 使用GSAP添加进入动画到content-title和select-box元素
-  gsap.fromTo('.alert-box', { opacity: 0, y: -10 }, {
-    duration: 1,
-    opacity: 1,
-    y: 0,
-    onComplete: () => {
-      // 动画完成后，过几秒后消失
-      setTimeout(() => {
-        gsap.to('.alert-box', { duration: 1, opacity: 0, y: -10, onComplete: hideElement });
-      }, 3000); // 在这里设置你想要的等待时间，这里是5秒
-    }
-  });
+})
 
+// // 页面渲染之后播放动画
+nextTick(() => {
+  console.log('==========')
+  //   // 使用GSAP添加进入动画到content-title和select-box元素
+  gsap.fromTo(
+    '.alert-box',
+    { opacity: 0, y: -10 },
+    {
+      duration: 1,
+      opacity: 1,
+      y: 0
+      // onComplete: () => {
+      //   //   // 动画完成后，过几秒后消失
+      //   gsap.to('.alert-box', {
+      //     duration: 1,
+      //     opacity: 0,
+      //     y: 0,
+      //     delay: 2
+      //     // onComplete: () => {
+      //     //   gsap.set('.alert-box', {
+      //     //     opacity: 1
+      //     //   })
+      //     // }
+      //   })
+      // }
+    }
+  )
 })
 </script>
 
@@ -70,12 +79,12 @@ nextTick(() => {
   max-height: 8em;
 }
 
-.success {
+.alert-success {
   color: #9acc5b;
   background-color: #f8fff5;
 }
 
-.error {
+.alert-error {
   color: #ff5b5b;
   background-color: #fff5f5;
 }

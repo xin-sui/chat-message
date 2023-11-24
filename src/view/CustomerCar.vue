@@ -1,10 +1,6 @@
 <template>
   <div v-if="store.showChatMessage" @click="toggleSelect" class="message-icon right-box">
-    <slot name="cust-icon"></slot>
-    <div class="messsage-btn-img">
-      <img v-if="props.custIcon" :src="props.custIcon" alt="" />
-      <img v-else src="../../src/assets/img/customerImg/custtomer.png" alt="" />
-    </div>
+    <slot name="custIcon"></slot>
   </div>
   <div class="overlay" v-show="!store.showChatMessage">
     <transition name="select-message-fade" mode="out-in">
@@ -24,9 +20,9 @@ import { gsap } from 'gsap'
 const props = defineProps(['custIcon', 'custDown', 'custRight', 'setUrl'])
 const store = useMessageStore()
 store.setSocketUrl = props.setUrl
-nextTick(() => {
-  gsap.from('.right-box', { duration: 1, x: 200 })
-})
+// nextTick(() => {
+//   gsap.from('.right-box', { duration: 1, x: 200 })
+// })
 const toggleSelect = () => {
   store.showChatMessage = !store.showChatMessage
   // nextTick(() => {
@@ -43,10 +39,10 @@ const toggleSelect = () => {
       {
         duration: 0.5,
         opacity: 1,
-        x: 0,
-        onComplete: () => {
-          // 在动画完成后，可以添加其他逻辑
-        }
+        x: 0
+        // onComplete: () => {
+        //   // 在动画完成后，可以添加其他逻辑
+        // }
       }
     )
   })
@@ -54,15 +50,15 @@ const toggleSelect = () => {
 </script>
 
 <style scoped>
-.right-box {
+/*.right-box {
   position: fixed;
   right: 0%;
   bottom: 50%;
   pointer-events: all;
   cursor: pointer;
-}
+}*/
 
-.messsage-btn-img {
+/*.messsage-btn-img {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,7 +69,7 @@ const toggleSelect = () => {
   width: 5.6875em;
   height: 8.875em;
   object-fit: contain;
-}
+}*/
 
 .overlay {
   position: fixed;
