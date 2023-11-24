@@ -1,7 +1,7 @@
 <template>
   <svg
     style="cursor: pointer"
-    v-if="isSwitchICon"
+    v-if="store.toggleEmjiIcon"
     @click="showEmojiChange"
     width="26"
     height="26"
@@ -45,7 +45,7 @@
   <input
     class="bottom-inp"
     @keydown.enter="sendMessage"
-    v-model="newMessage"
+    v-model="store.inputNewMessage"
     placeholder="something..."
     type="text"
   />
@@ -71,7 +71,17 @@
 </template>
 
 <script setup>
+import { socket } from '@/socket/socketIo'
 import WebbitButtom from '../WebbitButtom.vue'
+import { useMessageStore } from '@/store/useMessageStore'
+const store = useMessageStore()
+
+const showEmojiChange = () => {
+  store.toggleEmjiIcon = !store.toggleEmjiIcon
+}
+const sendMessage = () => {
+  socket.emit('')
+}
 </script>
 
 <style lang="scss" scoped>

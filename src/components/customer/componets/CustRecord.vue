@@ -1,8 +1,8 @@
 <template>
   <div
+    class="message"
     v-for="(message, index) in chatMesage"
     :key="index"
-    class="message"
     :class="{ 'receiver-message': message.receiver, 'sender-message': !message.receiver }"
   >
     <img
@@ -26,11 +26,16 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+
+const chatMesage = ref([])
+</script>
 
 <style lang="scss" scoped>
 .message {
   display: flex;
+  flex: 1;
   align-items: flex-start;
   margin: 0.625em;
 }
@@ -49,9 +54,11 @@
   /*white-space: pre-wrap;*/
   word-wrap: break-word;
 }
+
 .message-content {
   max-width: 80%;
 }
+
 .message-text-right {
   border-radius: 1.5em 0em 1.5em 1.5em;
   background-color: #ffffff;

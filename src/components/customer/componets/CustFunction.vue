@@ -47,7 +47,6 @@ const funColor = computed(() => {
 
 <style lang="scss" scoped>
 .chat-function-box {
-    position: relative;
     width: 100%;
     display: flex;
 
