@@ -1,13 +1,15 @@
 <template>
-  <div v-if="showAlert" class="alert-box" :class="[statusClass]">
+  <div v-if="displayAlert" class="alert-box" :class="[statusClass]">
     <p>{{ props.message }}</p>
     <slot name="description"></slot>
+    <button></button>
   </div>
 </template>
 
 <script setup>
 import { gsap } from 'gsap'
-import { defineProps, computed, nextTick } from 'vue'
+import { defineProps,defineEmits, computed, nextTick,ref } from 'vue';
+
 const props = defineProps({
   message: {
     type: String,
@@ -16,49 +18,42 @@ const props = defineProps({
   status: {
     type: String,
     default: 'success'
-  },
-  showAlert: {
-    type: Boolean,
-    default: false
   }
-})
-
-// 根据类型动态设置类名
+});
+const displayAlert=ref(true)
+// 根据传入的 status 属性值计算动态类名
 const statusClass = computed(() => {
-  return {
-    'alert-success': props.status === 'success',
-    'alert-error ': props.status === 'error'
-    // 可根据需要添加更多类型的类名
+  if (props.status === 'success') {
+    return 'success';
+  } else if (props.status === 'error') {
+    return 'error';
+  } else {
+    return 'success';
   }
-})
+});
+// 声明子组件可以触发的事件
+const emits = defineEmits(['after-close']);
 
-// // 页面渲染之后播放动画
+// 动画结束后隐藏元素
+const hideElement = () => {
+  // 隐藏alert-box元素
+  displayAlert.value=false
+    // 触发名为 `after-close` 的事件
+  emits('after-close');
+}
+// 页面渲染之后播放动画
 nextTick(() => {
-  console.log('==========')
-  //   // 使用GSAP添加进入动画到content-title和select-box元素
-  gsap.fromTo(
-    '.alert-box',
-    { opacity: 0, y: -10 },
-    {
-      duration: 1,
-      opacity: 1,
-      y: 0
-      // onComplete: () => {
-      //   //   // 动画完成后，过几秒后消失
-      //   gsap.to('.alert-box', {
-      //     duration: 1,
-      //     opacity: 0,
-      //     y: 0,
-      //     delay: 2
-      //     // onComplete: () => {
-      //     //   gsap.set('.alert-box', {
-      //     //     opacity: 1
-      //     //   })
-      //     // }
-      //   })
-      // }
+  // 使用GSAP添加进入动画到content-title和select-box元素
+  gsap.fromTo('.alert-box', { opacity: 0, y: -10 }, {
+    duration: 1,
+    opacity: 1,
+    y: 0,
+    onComplete: () => {
+      // 动画完成后，过几秒后消失
+        gsap.to('.alert-box', { duration: 1, opacity: 0, y: -10,delay:5, onComplete: hideElement });
     }
-  )
+  });
+
 })
 </script>
 
@@ -79,12 +74,12 @@ nextTick(() => {
   max-height: 8em;
 }
 
-.alert-success {
+.success {
   color: #9acc5b;
   background-color: #f8fff5;
 }
 
-.alert-error {
+.error {
   color: #ff5b5b;
   background-color: #fff5f5;
 }

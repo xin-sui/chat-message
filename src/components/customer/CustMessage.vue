@@ -118,13 +118,13 @@
     <!-- 内容区 -->
     <div class="chat-container">
       <!-- 提示窗 -->
-      <div v-if="showAlert" class="alert-message">
-        <Webbit-Alert :status="showAlertStatus" :message="alertMessage">
-          <template v-if="showTimeOut" #description>
-            <p>please contact customer service again</p>
-          </template>
-        </Webbit-Alert>
-      </div>
+      <!-- <div v-if="showAlert" class="alert-message"> -->
+      <Webbit-Alert :status="showAlertStatus" :message="alertMessage">
+        <template v-if="showTimeOut" #description>
+          <p>please contact customer service again</p>
+        </template>
+      </Webbit-Alert>
+      <!-- </div> -->
       <div v-if="showOverlay" class="overlay" @click="toggleOverlay">
         <div class="overlay-content">
           <svg
