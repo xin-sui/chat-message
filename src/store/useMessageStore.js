@@ -1,15 +1,61 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import img1 from '../assets/img/customerImg/customer-img.png'
 
 export const useMessageStore = defineStore('message', () => {
   const toCustomer = ref(true)
+  const userMessage = ref([
+    {
+      content: '你好',
+      from: 'c86cd3ae3acdd04dab29cf3ad1307fff',
+      receiver: false,
+      timestamp: 1701076218952
+    },
+    {
+      content: '你好',
+      from: 'c86cd3ae3acdd04dab29cf3ad1307fff',
+      receiver: false,
+      timestamp: 1701076221421
+    },
+    {
+      content: '你好',
+      from: 'c86cd3ae3acdd04dab29cf3ad1307fff',
+      receiver: false,
+      timestamp: 1701076229191
+    },
+    {
+      content: '你好',
+      from: 'c86cd3ae3acdd04dab29cf3ad1307fff',
+      receiver: true,
+      timestamp: 1701076231289
+    },
+    {
+      content: '你好',
+      from: 'c86cd3ae3acdd04dab29cf3ad1307fff',
+      receiver: false,
+      timestamp: 1701076232628
+    },
+    {
+      content: '你好',
+      from: 'c86cd3ae3acdd04dab29cf3ad1307fff',
+      receiver: false,
+      timestamp: 1701076233763
+    },
+    {
+      content: '你好',
+      from: 'c86cd3ae3acdd04dab29cf3ad1307fff',
+      receiver: false,
+      timestamp: 1701076235002
+    },
+    {
+      content: '你好',
+      from: 'c86cd3ae3acdd04dab29cf3ad1307fff',
+      receiver: false,
+      timestamp: 1701076236704
+    }
+  ])
   const showChatMessage = ref(true)
-  const localImagePaths = img1
-  const userMessage = ref([])
-
-  //是否显示邮箱
-  let isEmailBox = ref(false)
+  //控制邮箱显示与隐藏
+  const showEmailBox = ref(false)
   //设置接口
   let setSocketUrl = ref('')
   //切换表情
@@ -17,12 +63,11 @@ export const useMessageStore = defineStore('message', () => {
   const inputNewMessage = ref('')
   return {
     toCustomer,
-    showChatMessage,
-    localImagePaths,
     userMessage,
-    isEmailBox,
+    showEmailBox,
     setSocketUrl,
     toggleEmjiIcon,
-    inputNewMessage
+    inputNewMessage,
+    showChatMessage
   }
 })

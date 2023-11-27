@@ -19,6 +19,7 @@
   --app-color-button-bg: #33baea;
   --app-color-button-bg-hover: #cccc;
   --customer-border-radis: 2em;
+  --customer-phone-border-radis: 2em 2em 0 0;
 }
 p {
   margin: 0 !important;

@@ -1,26 +1,18 @@
 <template>
-  <div
-    class="message"
-    v-for="(message, index) in store.userMessage"
-    :key="index"
-    :class="{ 'receiver-message': message.receiver, 'sender-message': !message.receiver }"
-  >
-    <img
-      v-if="message.receiver"
-      class="avatar"
-      :src="store.localImagePaths[0]"
-      :alt="message.altText"
-    />
+  <div ref="chatContainerRef" class="chat-message-log">
+    <div class="message" v-for="(message, index) in store.userMessage" :key="index"
+      :class="{ 'receiver-message': message.receiver, 'sender-message': !message.receiver }">
+      <img v-if="message.receiver" class="avatar" src="../../../assets/img/customerImg/customer-img.png"
+        :alt="message.altText" />
 
-    <div class="message-content">
-      <div
-        :class="{
+      <div class="message-content">
+        <div :class="{
           'message-text': true,
           'message-text-left': message.receiver,
           'message-text-right': !message.receiver
-        }"
-      >
-        {{ message.content }}
+        }">
+          {{ message.content }}
+        </div>
       </div>
     </div>
   </div>
@@ -78,5 +70,13 @@ console.log(store.userMessage)
   display: flex;
   justify-content: flex-start;
   flex-direction: row-reverse;
+}
+
+.chat-message-log {
+  display: flex;
+  max-height: 34.5em;
+  flex: 1;
+  flex-direction: column;
+  overflow-y: auto;
 }
 </style>
