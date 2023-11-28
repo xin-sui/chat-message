@@ -257,19 +257,17 @@ const toStartMessage = async () => {
 }
 //返回信息是否通过连接
 socket.on('no phoneID', ({ code, msg }) => {
-  let countdownTimer;
   isButtonDisabled.value = true
   isActive.value = true
 
   if (code == 1) {
-    clearInterval(countdownTimer)
     showOverlay.value = false
     showAlert.value = true
     showAlertStatus.value = 'success'
     alertMessage.value = msg
     showChatRecord.value = true
     showButtonChat.value = true
-
+    showOverlay.value = false
   } else {
     showOverlay.value = true
     isFuntionAction.value = true
@@ -283,6 +281,7 @@ watchEffect(() => {
     setInterval(() => {
       socket.connect()
     }, 5000)
+
   }
 })
 //提示框关闭触发
