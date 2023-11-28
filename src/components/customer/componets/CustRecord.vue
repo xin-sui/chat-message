@@ -21,6 +21,7 @@
 <script setup>
 import { useMessageStore } from '@/store/useMessageStore'
 import { nextTick, ref, watchEffect } from 'vue';
+import { socket } from '@/socket/socketIo'
 const store = useMessageStore()
 //聊天滚动
 const chatContainerRef = ref(null)
@@ -36,6 +37,14 @@ watchEffect(() => {
   if (store.userMessage.length) {
     scrollToBottom()
   }
+})
+//接收消息WhatsApp发送的消息
+socket.on('private message', (msg) => {
+  store.userMessage.push({
+    id: store.userMessage.length + 1,
+    content: msg,
+    receiver: true
+  })
 })
 </script>
 
