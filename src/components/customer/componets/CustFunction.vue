@@ -78,8 +78,6 @@ const closeIconChange = () => {
     });
     emit('before-close')
 }
-const isAnimate = ref(props.animate)
-console.log(isAnimate.value);
 
 watchEffect(() => {
     if (props.animate == true) {

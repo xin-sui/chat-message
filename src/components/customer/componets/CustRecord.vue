@@ -20,8 +20,23 @@
 
 <script setup>
 import { useMessageStore } from '@/store/useMessageStore'
+import { nextTick, ref, watchEffect } from 'vue';
 const store = useMessageStore()
-console.log(store.userMessage)
+//聊天滚动
+const chatContainerRef = ref(null)
+const scrollToBottom = () => {
+  nextTick(() => {
+    if (chatContainerRef.value) {
+      chatContainerRef.value.scrollTop = chatContainerRef.value.scrollHeight
+    }
+  })
+
+}
+watchEffect(() => {
+  if (store.userMessage.length) {
+    scrollToBottom()
+  }
+})
 </script>
 
 <style lang="scss" scoped>
@@ -78,5 +93,22 @@ console.log(store.userMessage)
   flex: 1;
   flex-direction: column;
   overflow-y: auto;
+}
+
+.chat-message-log::-webkit-scrollbar {
+  width: 0.5em !important;
+  /* 设置滚动条宽度 */
+}
+
+.chat-message-log::-webkit-scrollbar-thumb {
+  background-color: #d9d9d9 !important;
+  /* 设置滚动条滑块的颜色 */
+  border-radius: 4px !important;
+  /* 设置滚动条滑块的圆角 */
+}
+
+.chat-message-log::-webkit-scrollbar-thumb:hover {
+  background-color: #80a5cc !important;
+  /* 设置滚动条滑块在悬停时的颜色 */
 }
 </style>

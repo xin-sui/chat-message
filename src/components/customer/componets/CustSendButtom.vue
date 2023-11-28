@@ -47,7 +47,6 @@ const showEmojiChange = () => {
 const emit = defineEmits(['send-message'])
 //发送信息
 const sendMessage = () => {
-  console.log(store.inputNewMessage)
   if (store.inputNewMessage) {
     store.userMessage.push({
       id: store.userMessage.length + 1,

@@ -201,7 +201,7 @@ import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src'
 import { useMessageStore } from '../../store/useMessageStore'
 const store = useMessageStore()
 import { socket } from '@/socket/socketIo'
-import { ref, watch, nextTick, onMounted } from 'vue'
+import { ref, watch, watchEffect } from 'vue'
 import { gsap } from 'gsap'
 //emoji
 let emojiIndex = ref('')
@@ -240,8 +240,7 @@ const isButtonDisabled = ref(false)
 const showButtonChat = ref(false)
 //当连接成功显示聊天对话
 const showChatRecord = ref(false)
-//聊天滚动
-const chatContainerRef = ref('')
+
 const toStartMessage = async () => {
   // 获取浏览器唯一标识用作用户userID
   const fp = await fpPromise
@@ -251,34 +250,46 @@ const toStartMessage = async () => {
     // 获取userID成公连接服务器，获取当前人数
     socket.auth = { userID }
     socket.connect()
-    //返回信息是否通过连接
-    socket.on('no phoneID', ({ code, msg }) => {
-      console.log(code, msg)
-      isButtonDisabled.value = true
-      isActive.value = true
-
-      if (code == 1) {
-        showAlert.value = true
-        showAlertStatus.value = 'success'
-        alertMessage.value = msg
-        showChatRecord.value = true
-        showButtonChat.value = true
-        isButtonDisabled.value = false
-        isActive.value = false
-      } else {
-        showOverlay.value = true
-        isFuntionAction.value = true
-      }
-    })
   } else {
     showAlert.value = true
     alertMessage.value = 'Failed to get userID'
   }
 }
+//返回信息是否通过连接
+socket.on('no phoneID', ({ code, msg }) => {
+  let countdownTimer;
+  isButtonDisabled.value = true
+  isActive.value = true
+
+  if (code == 1) {
+    clearInterval(countdownTimer)
+    showOverlay.value = false
+    showAlert.value = true
+    showAlertStatus.value = 'success'
+    alertMessage.value = msg
+    showChatRecord.value = true
+    showButtonChat.value = true
+
+  } else {
+    showOverlay.value = true
+    isFuntionAction.value = true
+    socket.disconnect()
+  }
+  isButtonDisabled.value = false
+  isActive.value = false
+})
+watchEffect(() => {
+  if (showOverlay.value) {
+    setInterval(() => {
+      socket.connect()
+    }, 5000)
+  }
+})
 //提示框关闭触发
 const handleAlertClose = () => {
   showAlert.value = false
   showTimeOut.value = ''
+  alertMessage.value = ''
   isButtonDisabled.value = false
   isActive.value = false
 }
@@ -312,31 +323,22 @@ const toClose = () => {
     }
   })
 }
-const scrollToBottom = () => {
-  nextTick(() => {
-    if (chatContainerRef.value) {
-      console.log(chatContainerRef.value.scrollTop, chatContainerRef.value.scrollHeight);
-      chatContainerRef.value.scrollTop = chatContainerRef.value.scrollHeight
-      console.log(chatContainerRef.value.scrollTop);
-    }
-  })
-}
+
 
 //发送信息之后
 const onSendMessage = () => {
-  console.log(111);
-  scrollToBottom()
+
 }
-onMounted(() => {
-  scrollToBottom()
-})
+
 //socket连接失败触发
 socket.on('connect_error', (error) => {
   if (error) {
+    socket.disconnect()
     showAlert.value = true //弹出提示
     alertMessage.value = 'An error occurred while accessing customer service'//返回到消息提示
     showAlertStatus.value = 'error'
   }
+
 })
 // import { onMounted, ref, nextTick } from 'vue'
 // import { useMessageStore } from '@/store/useMessageStore'
@@ -454,26 +456,7 @@ socket.on('connect_error', (error) => {
   width: 100%;
 }
 
-/* 自定义滚动条 */
-.chat-container ::-webkit-scrollbar {
-  width: 0.5em !important;
 
-  /* 设置滚动条宽度 */
-}
-
-/* 滚动条滑块 */
-.chat-container ::-webkit-scrollbar-thumb {
-  background-color: #d9d9d9 !important;
-  /* 设置滚动条滑块的颜色 */
-  border-radius: 4px !important;
-  /* 设置滚动条滑块的圆角 */
-}
-
-/* 滚动条滑块悬停时的样式 */
-.chat-container ::-webkit-scrollbar-thumb:hover {
-  background-color: #80a5cc !important;
-  /* 设置滚动条滑块在悬停时的颜色 */
-}
 
 .bottom-box {
   display: flex;

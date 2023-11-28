@@ -21,7 +21,7 @@ const props = defineProps({
         default: false
     }
 })
-console.log(props);
+
 // 根据传入的 size ref 设置不同的大小样式
 const buttonStyle = computed(() => {
     let sizeStyle = ''
