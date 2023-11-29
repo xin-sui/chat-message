@@ -35,10 +35,10 @@ const emits = defineEmits(['after-close'])
 
 // 动画结束后隐藏元素
 const hideElement = () => {
-  // 隐藏alert-box元素
-  displayAlert.value = false
   // 触发名为 `after-close` 的事件
   emits('after-close')
+  // 隐藏alert-box元素
+  displayAlert.value = false
 }
 // 页面渲染之后播放动画
 nextTick(() => {

@@ -201,8 +201,11 @@ import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src'
 import { useMessageStore } from '../../store/useMessageStore'
 const store = useMessageStore()
 import { socket } from '@/socket/socketIo'
-import { ref, watch, watchEffect } from 'vue'
+import { ref, watch } from 'vue'
 import { gsap } from 'gsap'
+//获取IP地址
+import { publicIpv4 } from 'public-ip';
+
 //emoji
 let emojiIndex = ref('')
 emojiIndex.value = new EmojiIndex(data)
@@ -218,12 +221,7 @@ const fpPromise = FingerprintJS.load()
 const funBackColor = ref('blue')
 //功能区显示
 const isFuntionAction = ref(false)
-//监听聊天信息到达12句触发功能弹出
-watch(store.userMessage, (newValue) => {
-  if (newValue.length == 2) {
-    isFuntionAction.value = true
-  }
-})
+
 //控制弹窗信息
 const alertMessage = ref('')
 const showAlertStatus = ref('')
@@ -245,11 +243,16 @@ const toStartMessage = async () => {
   // 获取浏览器唯一标识用作用户userID
   const fp = await fpPromise
   const result = await fp.get()
+  const IP = await publicIpv4()
   const userID = result.visitorId
   if (userID) {
     // 获取userID成公连接服务器，获取当前人数
-    socket.auth = { userID }
+    socket.auth = { userID, IP }
     socket.connect()
+    isButtonDisabled.value = true
+    isActive.value = true
+    showOverlay.value = true
+    isFuntionAction.value = true
   } else {
     showAlert.value = true
     alertMessage.value = 'Failed to get userID'
@@ -257,33 +260,37 @@ const toStartMessage = async () => {
 }
 //返回信息是否通过连接
 socket.on('no phoneID', ({ code, msg }) => {
-  isButtonDisabled.value = true
-  isActive.value = true
 
   if (code == 1) {
-    showOverlay.value = false
+    //弹窗
     showAlert.value = true
+    //弹窗状态
     showAlertStatus.value = 'success'
+    //弹窗信息
     alertMessage.value = msg
+    //是否显示对话
     showChatRecord.value = true
+    //发送消息
     showButtonChat.value = true
+    //等待
     showOverlay.value = false
-  } else {
-    showOverlay.value = true
-    isFuntionAction.value = true
-    socket.disconnect()
-  }
-  isButtonDisabled.value = false
-  isActive.value = false
-})
-watchEffect(() => {
-  if (showOverlay.value) {
-    setInterval(() => {
-      socket.connect()
-    }, 5000)
+    //按钮
+    isButtonDisabled.value = false
+    //是否激活按钮
+    isActive.value = false
+    isFuntionAction.value = false
 
   }
+
 })
+
+//监听聊天信息到达12句触发功能弹出
+watch(store.userMessage, (newValue) => {
+  if (newValue.length == 12) {
+    isFuntionAction.value = true
+  }
+})
+
 //提示框关闭触发
 const handleAlertClose = () => {
   showAlert.value = false
@@ -299,6 +306,7 @@ const handleFunClose = () => {
 //超过5分钟服务器发送消息
 socket.on('time passes', ({ msg, code }) => {
   if (code == 0) {
+
     showAlert.value = true //弹出提示
     alertMessage.value = msg[0] //返回到消息提示
     showAlertStatus.value = 'error'
@@ -308,6 +316,8 @@ socket.on('time passes', ({ msg, code }) => {
     store.toggleEmjiIcon = false //关闭表情
     isButtonDisabled.value = true //禁用按钮
     isActive.value = true //开始按钮颜色暗淡
+    isFuntionAction.value = false
+    showOverlay.value = false
     socket.disconnect()
   }
 })
@@ -332,10 +342,13 @@ const onSendMessage = () => {
 //socket连接失败触发
 socket.on('connect_error', (error) => {
   if (error) {
+
     socket.disconnect()
     showAlert.value = true //弹出提示
     alertMessage.value = 'An error occurred while accessing customer service'//返回到消息提示
     showAlertStatus.value = 'error'
+    showChatRecord.value = false
+    showButtonChat.value = false
   }
 
 })
