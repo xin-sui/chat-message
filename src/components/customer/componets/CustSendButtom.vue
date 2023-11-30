@@ -1,6 +1,6 @@
 <template>
-  <svg style="cursor: pointer" v-if="!store.toggleEmjiIcon" @click="showEmojiChange" width="26" height="26"
-    viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg style="cursor: pointer" v-if="!store.toggleEmojiIcon" @click="showEmojiChange" width="26" height="26"
+       viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M12.9105 1.69727C9.8976 1.70028 7.00897 2.89848 4.87853 5.02892C2.74809 7.15936 1.54989 10.048 1.54688 13.0609C1.54989 16.0738 2.74809 18.9624 4.87853 21.0929C7.00897 23.2233 9.8976 24.4215 12.9105 24.4245C15.9234 24.4215 18.812 23.2233 20.9425 21.0929C23.0729 18.9624 24.2711 16.0738 24.2741 13.0609C24.2711 10.048 23.0729 7.15936 20.9425 5.02892C18.812 2.89848 15.9234 1.70028 12.9105 1.69727ZM12.9105 22.7995C10.3286 22.7965 7.85327 21.7695 6.02758 19.9438C4.20188 18.1181 3.17489 15.6428 3.17188 13.0609C3.17489 10.479 4.20188 8.00366 6.02758 6.17797C7.85327 4.35227 10.3286 3.32528 12.9105 3.32227C15.4924 3.32528 17.9677 4.35227 19.7934 6.17797C21.6191 8.00366 22.6461 10.479 22.6491 13.0609C22.6461 15.6428 21.6191 18.1181 19.7934 19.9438C17.9677 21.7695 15.4924 22.7965 12.9105 22.7995Z"
       fill="#929292" />
@@ -42,7 +42,7 @@ import { useMessageStore } from '@/store/useMessageStore'
 const store = useMessageStore()
 //切换表情框显示
 const showEmojiChange = () => {
-  store.toggleEmjiIcon = !store.toggleEmjiIcon
+  store.toggleEmojiIcon = !store.toggleEmojiIcon
 }
 const emit = defineEmits(['send-message'])
 //发送信息
