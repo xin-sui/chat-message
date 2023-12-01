@@ -161,7 +161,7 @@ import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src'
 import { useMessageStore } from '@/store/useMessageStore'
 const store = useMessageStore()
 import { socket } from '@/socket/socketIo'
-import { ref, watch } from 'vue'
+import { ref, } from 'vue'
 import { gsap } from 'gsap'
 //获取IP地址
 import { publicIpv4 } from 'public-ip'
@@ -179,8 +179,7 @@ import FingerprintJS from '@fingerprintjs/fingerprintjs'
 const fpPromise = FingerprintJS.load()
 //控制功能区颜色
 // const funBackColor = ref('blue')
-//功能区显示
-const isFunctionAction = ref(false)
+
 
 //控制弹窗信息
 const alertMessage = ref('')
@@ -471,7 +470,7 @@ socket.on('connect_error', (error) => {
     /*控制加载中颜色*/
     .overlay-spin path,
     .overlay-spin rect {
-      fill: var(--app-color-button-bg);
+      fill: var(--app-color-theme);
     }
   }
 
