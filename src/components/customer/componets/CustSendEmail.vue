@@ -255,7 +255,7 @@ input:focus {
     }
 }
 
-@media screen and (max-width: 48em) {
+@media screen and (max-width: 768px) {
     .email-box {
         border-radius: var(--customer-phone-border-radis);
     }
