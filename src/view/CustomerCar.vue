@@ -1,5 +1,6 @@
 <template>
-  <div v-if="store.showChatMessage" @click="toggleSelect" class="message-icon right-box">
+  <div v-if="store.showChatMessage" @click="toggleSelect">
+
     <slot name="custIcon"></slot>
   </div>
   <div class="overlay" v-show="!store.showChatMessage">
