@@ -109,7 +109,7 @@ socket.on('private message', (msg) => {
 .chat-message-log {
   display: flex;
   flex: 1;
-  max-height: 36.5em;
+  max-height: 39.5em;
   flex-direction: column;
   overflow-y: scroll;
 }
@@ -132,7 +132,7 @@ socket.on('private message', (msg) => {
 }
 
 .chat-phone {
-  height: 3em;
+  height: 2em;
   justify-self: center;
   align-self: center;
 }

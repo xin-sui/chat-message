@@ -132,7 +132,7 @@
     </div>
 
     <!-- 底部 -->
-    <div class="bottom-box">
+    <div class="bottom-box" :class="[{ bottomSendButtonWidth: showButtonChat }]">
       <CustSendButtom v-if="showButtonChat"></CustSendButtom>
       <webbitButtom @click="toStartMessage" v-else :disabled="isButtonDisabled" :size="'large'" :isActive="isActive">
         <template #icon><svg width="132" height="13" viewBox="0 0 132 13" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -179,7 +179,6 @@ import FingerprintJS from '@fingerprintjs/fingerprintjs'
 const fpPromise = FingerprintJS.load()
 //控制功能区颜色
 // const funBackColor = ref('blue')
-
 
 //控制弹窗信息
 const alertMessage = ref('')
@@ -417,10 +416,14 @@ socket.on('connect_error', (error) => {
 
 .bottom-box {
   display: flex;
-  height: 8em;
-  padding: 0 2em;
+  height: 6em;
+  padding: 0 3.5em;
   align-items: center;
   justify-content: center;
+}
+
+.bottomSendButtonWidth {
+  padding: 0 1.5em !important;
 }
 
 .emijon-box {

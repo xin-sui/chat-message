@@ -1,10 +1,5 @@
 <template>
-  <button
-    :class="{ active: props.isActive }"
-    class="send-container"
-    :disabled="props.disabled"
-    :style="buttonStyle"
-  >
+  <button :class="{ active: props.isActive }" class="send-container" :disabled="props.disabled" :style="buttonStyle">
     <slot name="icon"></slot>
   </button>
 </template>
@@ -53,7 +48,7 @@ const buttonStyle = computed(() => {
   /* 圆角 */
   background-color: var(--app-color-theme);
   /* 背景颜色 */
-  height: 4em;
+  height: 3.8em;
   display: flex;
   align-items: center;
   justify-content: center;
