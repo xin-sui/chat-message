@@ -4,6 +4,10 @@
       :class="{ 'receiver-message': message.receiver, 'sender-message': !message.receiver }">
       <img v-if="message.receiver" class="avatar" src="../../../assets/img/customerImg/customer-img.png"
         :alt="message.altText" />
+      <svg v-else class="avatar-user" width="8" height="8" viewBox="0 0 8 8" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+        <circle cx="4" cy="4" r="4" fill="#A9E162" style="fill: var(--app-color-theme)" />
+      </svg>
 
       <div class="message-content">
         <div :class="{
@@ -78,6 +82,7 @@ socket.on('private message', (msg) => {
   font-size: 0.9375em;
   /*white-space: pre-wrap;*/
   word-wrap: break-word;
+  letter-spacing: 1px;
 }
 
 .message-content {
@@ -104,6 +109,10 @@ socket.on('private message', (msg) => {
   display: flex;
   justify-content: flex-start;
   flex-direction: row-reverse;
+}
+
+.sender-message:nth-child(1) {
+  margin-top: 2em;
 }
 
 .chat-message-log {
@@ -135,5 +144,11 @@ socket.on('private message', (msg) => {
   height: 2em;
   justify-self: center;
   align-self: center;
+}
+
+.avatar-user {
+  width: 8px;
+  height: 8px;
+  margin-left: 8px;
 }
 </style>
