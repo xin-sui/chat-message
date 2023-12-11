@@ -16,15 +16,14 @@
         fill="#929292" />
     </svg>
     <!-- 表情 -->
-    <svg v-else @click="showEmojiChange" width="25" height="25" viewBox="0 0 26 26" fill="none" style="cursor: pointer"
+
+    <svg v-else @click="showEmojiChange" width="26" height="26" viewBox="0 0 26 26" fill="none"
       xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M13.0005 15.8963L5.04881 7.37661C4.57933 6.87446 3.81952 6.87446 3.35155 7.37661C2.88282 7.87874 2.88282 8.69341 3.35155 9.19554L12.1521 18.624C12.6208 19.1253 13.381 19.1253 13.8483 18.624L22.6485 9.19554C22.8828 8.9437 23 8.61454 23 8.28532C23 7.95609 22.8828 7.62692 22.6477 7.37661C22.179 6.87446 21.4203 6.87446 20.9515 7.37661L13.0005 15.8963Z"
-        fill="#929292" />
+      <path d="M4 10L13 19" stroke="#929292" stroke-width="1.7" stroke-linecap="round" />
+      <path d="M22 10L13 19" stroke="#929292" stroke-width="1.7" stroke-linecap="round" />
     </svg>
+
   </div>
-
-
 
 
   <input class="bottom-inp" @keydown.enter="sendMessage" v-model="store.inputNewMessage" placeholder="something..."
@@ -78,22 +77,9 @@ const sendMessage = () => {
   font-size: small !important;
 }
 
-.bottom-inp::-ms-input-placeholder {
-  /* 输入内容... */
-  width: 5.75em;
-  height: 1.6875em;
 
-  /* web/web正文文本 */
-  font-family: 'Noto Sans TC';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.125em;
-  line-height: 1.6875em;
-  /* identical to box height, or 150% */
-  letter-spacing: 0.04em;
-
-  /* 灰度/3 */
-  color: #929292;
+input::placeholder {
+  color: rgba(146, 146, 146, 0.46);
 }
 
 input:focus {

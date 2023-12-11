@@ -123,10 +123,13 @@
       <CustRecord v-if="showChatRecord"></CustRecord>
       <CustStartTitle v-else></CustStartTitle>
 
-      <!-- 聊天对话 -->
-      <div v-show="store.toggleEmojiIcon" class="emijon-box">
-        <Picker :showPreview="false" :data="emojiIndex" set="twitter" @select="selectEmoji" />
+      <!-- 聊天表情 -->
+      <div v-show="store.toggleEmojiIcon" class="emijio-overlay" @click="closeEmojiChange">
+        <div class="emijon-box">
+          <Picker :showPreview="false" :data="emojiIndex" set="twitter" @select="selectEmoji" />
+        </div>
       </div>
+
       <!-- 功能区 -->
       <!-- 聊到12句与 连接等待时出现-->
     </div>
@@ -173,7 +176,9 @@ emojiIndex.value = new EmojiIndex(data)
 const selectEmoji = (emoji) => {
   store.inputNewMessage += emoji.native
 }
-
+const closeEmojiChange = () => {
+  store.toggleEmojiIcon = false
+}
 //客户端浏览器指纹识别库
 import FingerprintJS from '@fingerprintjs/fingerprintjs'
 const fpPromise = FingerprintJS.load()
@@ -480,6 +485,15 @@ socket.on('connect_error', (error) => {
   .overlay-phone {
     height: 2.5em;
   }
+}
+
+.emijio-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
 }
 
 @media screen and (max-width: 768px) {

@@ -83,6 +83,7 @@ socket.on('private message', (msg) => {
   /*white-space: pre-wrap;*/
   word-wrap: break-word;
   letter-spacing: 1px;
+  text-align: justify;
 }
 
 .message-content {
@@ -90,12 +91,14 @@ socket.on('private message', (msg) => {
 }
 
 .message-text-right {
+
   border-radius: 1.5em 0em 1.5em 1.5em;
   background-color: #ffffff;
   color: #474747;
 }
 
 .message-text-left {
+  margin-top: 20px;
   border-radius: 0 1.5em 1.5em 1.5em;
   background-color: #33bcea;
   color: #ffffff;
@@ -141,9 +144,10 @@ socket.on('private message', (msg) => {
 }
 
 .chat-phone {
-  height: 2em;
-  justify-self: center;
-  align-self: center;
+  height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .avatar-user {

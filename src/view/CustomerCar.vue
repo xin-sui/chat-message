@@ -3,7 +3,7 @@
 
     <slot name="custIcon"></slot>
   </div>
-  <div class="overlay" v-show="!store.showChatMessage">
+  <div v-show="!store.showChatMessage">
     <transition name="select-message-fade" mode="out-in">
       <CustMessage></CustMessage>
     </transition>
