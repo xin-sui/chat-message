@@ -121,7 +121,7 @@ socket.on('private message', (msg) => {
 .chat-message-log {
   display: flex;
   flex: 1;
-  max-height: 39.5em;
+  max-height: 38.5em;
   flex-direction: column;
   overflow-y: scroll;
 }
