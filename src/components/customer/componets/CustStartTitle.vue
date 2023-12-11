@@ -71,13 +71,14 @@ const store = useMessageStore()
 
 //验证
 const validatePhoneNumber = () => {
-  // Add your phone number validation logic here
-  if (!/^\d{11}$/.test(store.loginPhone)) {
-    store.sendPhoneStatus = false
+  const phoneNumberRegex = /^[\d+\-\s]+$/;
+  if (!phoneNumberRegex.test(store.loginPhone)) {
+    store.sendPhoneStatus = false;
   } else {
-    store.sendPhoneStatus = true
+    store.sendPhoneStatus = true;
   }
-}
+};
+
 
 const validateEmail = () => {
   // Add your email validation logic here

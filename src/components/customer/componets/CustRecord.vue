@@ -79,7 +79,7 @@ socket.on('private message', (msg) => {
 .message-text {
   padding: 1.5em;
   background-color: #e1e1e1;
-  font-size: 0.9375em;
+
   /*white-space: pre-wrap;*/
   word-wrap: break-word;
   letter-spacing: 1px;
@@ -87,6 +87,7 @@ socket.on('private message', (msg) => {
 }
 
 .message-content {
+  font-size: 1.2em;
   max-width: 80%;
 }
 
