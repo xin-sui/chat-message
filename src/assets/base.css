@@ -16,8 +16,8 @@
   font-size: 62.5% !important;
 } */
 :root {
-  --app-color-theme: #33baea;
-  --app-color-button-bg-6: #cccc;
+  /* --app-color-theme: #33baea;
+  --app-color-button-bg-6: #cccc; */
   --customer-border-radis: 2em;
   --customer-phone-border-radis: 2em 2em 0 0;
 }
