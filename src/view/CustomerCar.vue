@@ -1,9 +1,9 @@
 <template>
   <div v-if="store.showChatMessage" @click="toggleSelect">
-
     <slot name="custIcon"></slot>
   </div>
   <div v-show="!store.showChatMessage">
+    <div class="overlay"></div>
     <transition name="select-message-fade" mode="out-in">
       <CustMessage></CustMessage>
     </transition>
@@ -13,25 +13,14 @@
 export default { name: 'CustomerCar' }
 </script>
 <script setup>
-// import Select from '../components/customer/CustSelect.vue'
 import CustMessage from '../components/customer/CustMessage.vue'
 import { nextTick } from 'vue'
-import { useMessageStore } from '../store/useMessageStore'
+import { useMessageStore } from '@/store/useMessageStore'
 import { gsap } from 'gsap'
-const props = defineProps(['custIcon', 'custDown', 'custRight', 'setUrl'])
 const store = useMessageStore()
-store.setSocketUrl = props.setUrl
-// nextTick(() => {
-//   gsap.from('.right-box', { duration: 1, x: 200 })
-// })
+
 const toggleSelect = () => {
   store.showChatMessage = !store.showChatMessage
-  // nextTick(() => {
-  //   gsap.to('.message-container', {
-  //     duration: 1,
-  //     x: -200,
-  //   });
-  // })
   const animate = gsap.timeline()
   nextTick(() => {
     animate.fromTo(
@@ -41,9 +30,6 @@ const toggleSelect = () => {
         duration: 0.5,
         opacity: 1,
         x: 0
-        // onComplete: () => {
-        //   // 在动画完成后，可以添加其他逻辑
-        // }
       }
     )
   })
@@ -51,36 +37,21 @@ const toggleSelect = () => {
 </script>
 
 <style scoped>
-/*.right-box {
-  position: fixed;
-  right: 0%;
-  bottom: 50%;
-  pointer-events: all;
-  cursor: pointer;
-}*/
-
-/*.messsage-btn-img {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.messsage-btn-img img {
-  width: 5.6875em;
-  height: 8.875em;
-  object-fit: contain;
-}*/
-
 .overlay {
+  display: none;
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  height: 80%;
+  background-color: rgba(0, 0, 0, 0.7);
   /* 黑色半透明 */
   z-index: 999;
   /* 确保在其他内容之上 */
+}
+@media screen and (max-width: 768px) {
+  .overlay {
+    display: block;
+  }
 }
 </style>
