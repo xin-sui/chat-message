@@ -43,12 +43,13 @@ const toggleSelect = () => {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 80%;
+  height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
   /* 黑色半透明 */
   z-index: 999;
   /* 确保在其他内容之上 */
 }
+
 @media screen and (max-width: 768px) {
   .overlay {
     display: block;
